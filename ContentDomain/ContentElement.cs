@@ -7,13 +7,21 @@ using System.Threading.Tasks;
 namespace ContentDomain
 {
     public sealed class ContentElement<T>
-        where T : IContentValue
+        where T : class, IContentValue
     {
+        private T _value;
+
         public ContentStatus Status { get; private set; }
 
-        public void Add(T value)
+        public void SetValue(T value)
         {
             if (value == null) throw new ArgumentNullException("value");
+            _value = value;
+        }
+
+        public T GetValue()
+        {
+            return _value;
         }
     }
 }

@@ -17,13 +17,23 @@ namespace ContentDomain.Test
         public void should_throw_when_adding_null_value()
         {
             Assert.Throws<ArgumentNullException>(
-                () => CreateDefaultContentElement().Add(null));
+                () => CreateDefaultContentElement().SetValue(null));
         }
 
         [Fact]
         public void should_accept_value_when_not_null()
         {
-            CreateDefaultContentElement().Add(new EmptyValueStub());
+            CreateDefaultContentElement().SetValue(new EmptyValueStub());
+        }
+
+        [Fact]
+        public void should_overwrite_old_value_when_new_one_is_set()
+        {
+            var newValue = new EmptyValueStub();
+            var contentElement = CreateDefaultContentElement();
+            contentElement.SetValue(new EmptyValueStub());
+            contentElement.SetValue(newValue);
+            contentElement.GetValue().Should().Be(newValue);
         }
 
         [Fact]
