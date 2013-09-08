@@ -10,9 +10,16 @@ namespace ContentDomain
     {
         public ContentStatus Status { get; private set; }
 
+        public string Value { get; private set; }
+
         public void MarkComplete()
         {
             Status = ContentStatus.Complete;
+        }
+
+        public void SetValue(string value)
+        {
+            Value = value;
         }
     }
 }
