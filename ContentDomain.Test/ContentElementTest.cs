@@ -27,6 +27,12 @@ namespace ContentDomain.Test
             GetDefaultContentElement().Add(new EmptyValueStub());
         }
 
+        [Fact]
+        public void should_be_created_in_draft_status()
+        {
+            GetDefaultContentElement().Status.Should().Be(ContentStatus.Draft);
+        }
+
         private ContentElement<EmptyValueStub> GetDefaultContentElement()
         {
             return new ContentElement<EmptyValueStub>();

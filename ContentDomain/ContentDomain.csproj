@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentStatus.cs" />
     <Compile Include="ContentType.cs" />
     <Compile Include="ContentElement.cs" />
     <Compile Include="IContentValue.cs" />

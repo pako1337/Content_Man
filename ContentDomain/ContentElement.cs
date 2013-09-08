@@ -9,6 +9,8 @@ namespace ContentDomain
     public sealed class ContentElement<T>
         where T : IContentValue
     {
+        public ContentStatus Status { get; private set; }
+
         public void Add(T value)
         {
             if (value == null) throw new ArgumentNullException("value");
