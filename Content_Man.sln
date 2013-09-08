@@ -3,6 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentDomain", "ContentDomain\ContentDomain.csproj", "{8AA9A06B-68D5-482B-9832-FBF3E9A02075}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentDomain.Test", "ContentDomain.Test\ContentDomain.Test.csproj", "{EF98EC81-A5A0-472F-9976-1A64BB42C9C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E6FD156C-6699-4920-946F-1644999945DF}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +20,10 @@ Global
 		{8AA9A06B-68D5-482B-9832-FBF3E9A02075}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AA9A06B-68D5-482B-9832-FBF3E9A02075}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AA9A06B-68D5-482B-9832-FBF3E9A02075}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF98EC81-A5A0-472F-9976-1A64BB42C9C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF98EC81-A5A0-472F-9976-1A64BB42C9C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF98EC81-A5A0-472F-9976-1A64BB42C9C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF98EC81-A5A0-472F-9976-1A64BB42C9C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
