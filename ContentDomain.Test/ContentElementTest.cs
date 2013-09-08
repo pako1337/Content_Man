@@ -10,7 +10,7 @@ namespace ContentDomain.Test
         [Fact]
         public void should_be_created()
         {
-            var contentElement = GetDefaultContentElement();
+            var contentElement = CreateDefaultContentElement();
             contentElement.Should().NotBeNull();
         }
 
@@ -18,22 +18,22 @@ namespace ContentDomain.Test
         public void should_throw_when_adding_null_value()
         {
             Assert.Throws<ArgumentNullException>(
-                () => GetDefaultContentElement().Add(null));
+                () => CreateDefaultContentElement().Add(null));
         }
 
         [Fact]
         public void should_accept_value_when_not_null()
         {
-            GetDefaultContentElement().Add(new EmptyValueStub());
+            CreateDefaultContentElement().Add(new EmptyValueStub());
         }
 
         [Fact]
         public void should_be_created_in_draft_status()
         {
-            GetDefaultContentElement().Status.Should().Be(ContentStatus.Draft);
+            CreateDefaultContentElement().Status.Should().Be(ContentStatus.Draft);
         }
 
-        private ContentElement<EmptyValueStub> GetDefaultContentElement()
+        private ContentElement<EmptyValueStub> CreateDefaultContentElement()
         {
             return new ContentElement<EmptyValueStub>();
         }
