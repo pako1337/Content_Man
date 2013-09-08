@@ -14,24 +14,25 @@ namespace ContentDomain.Test
             contentElement.Should().NotBeNull();
         }
 
-        [Theory]
-        [InlineData(ContentType.Text)]
-        [InlineData(ContentType.List)]
-        [InlineData(ContentType.Graphic)]
-        public void should_have_type_assigned(ContentType type)
+        [Fact]
+        public void should_throw_when_adding_null_value()
         {
-            var contentElement = GetContentElementWithType(type);
-            contentElement.Type.Should().Be(type);
+            Assert.Throws<ArgumentNullException>(
+                () => GetDefaultContentElement().Add(null));
         }
 
-        private ContentElement GetDefaultContentElement()
+        [Fact]
+        public void should_accept_value_when_not_null()
         {
-            return GetContentElementWithType(ContentType.Text);
+            GetDefaultContentElement().Add(new EmptyValueStub());
         }
 
-        private ContentElement GetContentElementWithType(ContentType type)
+        private ContentElement<EmptyValueStub> GetDefaultContentElement()
         {
-            return new ContentElement(type);
+            return new ContentElement<EmptyValueStub>();
         }
+
+        private class EmptyValueStub : IContentValue
+        { }
     }
 }

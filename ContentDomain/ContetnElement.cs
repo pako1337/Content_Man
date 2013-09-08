@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace ContentDomain
 {
-    public class ContentElement
+    public class ContentElement<T>
+        where T : IContentValue
     {
-        public ContentType Type { get; private set; }
-
-        public ContentElement(ContentType type)
+        public void Add(T value)
         {
-            Type = type;
+            if (value == null) throw new ArgumentNullException("value");
         }
     }
 }
