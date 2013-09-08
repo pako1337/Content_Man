@@ -39,6 +39,8 @@ namespace ContentDomain.Test
         }
 
         private class EmptyValueStub : IContentValue
-        { }
+        {
+            public ContentStatus Status { get { return ContentStatus.Draft; } }
+        }
     }
 }
