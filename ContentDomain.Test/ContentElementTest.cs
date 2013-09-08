@@ -10,8 +10,7 @@ namespace ContentDomain.Test
         [Fact]
         public void should_be_created()
         {
-            var contentElement = CreateDefaultContentElement();
-            contentElement.Should().NotBeNull();
+            CreateDefaultContentElement().Should().NotBeNull();
         }
 
         [Fact]
