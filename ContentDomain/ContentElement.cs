@@ -23,5 +23,13 @@ namespace ContentDomain
         {
             return _value;
         }
+
+        public void MarkComplete()
+        {
+            if (_value.Status != ContentStatus.Complete)
+                throw new InvalidOperationException();
+
+            Status = ContentStatus.Complete;
+        }
     }
 }
