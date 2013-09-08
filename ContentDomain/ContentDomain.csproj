@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentType.cs" />
-    <Compile Include="ContetnElement.cs" />
+    <Compile Include="ContentElement.cs" />
     <Compile Include="IContentValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
