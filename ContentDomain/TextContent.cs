@@ -19,7 +19,11 @@ namespace ContentDomain
 
         public void SetValue(string value)
         {
+            if (String.CompareOrdinal(value, Value) == 0)
+                return;
+
             Value = value;
+            Status = ContentStatus.Draft;
         }
     }
 }

@@ -29,6 +29,25 @@ namespace ContentDomain.Test
             content.Value.Should().Be("text");
         }
 
+        [Fact]
+        public void should_reset_status_to_draft_after_content_changed()
+        {
+            var content = CreateEmptyTextContent();
+            content.MarkComplete();
+            content.SetValue("text");
+            content.Status.Should().Be(ContentStatus.Draft);
+        }
+
+        [Fact]
+        public void should_not_reset_status_to_draft_after_content_changed_to_the_same_value()
+        {
+            var content = CreateEmptyTextContent();
+            content.SetValue("text");
+            content.MarkComplete();
+            content.SetValue("text");
+            content.Status.Should().Be(ContentStatus.Complete);
+        }
+
         private TextContent CreateEmptyTextContent()
         {
             return new TextContent();
