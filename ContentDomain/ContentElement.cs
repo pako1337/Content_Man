@@ -11,8 +11,6 @@ namespace ContentDomain
     {
         private T _value;
 
-        public ContentStatus Status { get; private set; }
-
         public void SetValue(T value)
         {
             if (value == null) throw new ArgumentNullException("value");
@@ -22,14 +20,6 @@ namespace ContentDomain
         public T GetValue()
         {
             return _value;
-        }
-
-        public void MarkComplete()
-        {
-            if (_value.Status != ContentStatus.Complete)
-                throw new InvalidOperationException();
-
-            Status = ContentStatus.Complete;
         }
     }
 }

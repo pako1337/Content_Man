@@ -9,5 +9,6 @@ namespace ContentDomain
     public interface IContentValue
     {
         ContentStatus Status { get; }
+        void MarkComplete();
     }
 }
