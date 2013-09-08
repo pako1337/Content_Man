@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContentDomain
 {
-    public class ContentElement<T>
+    public sealed class ContentElement<T>
         where T : IContentValue
     {
         public void Add(T value)
