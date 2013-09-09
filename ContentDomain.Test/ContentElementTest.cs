@@ -45,6 +45,8 @@ namespace ContentDomain.Test
         {
             public ContentStatus Status { get { return ContentStatus.Draft; } }
 
+            public Language Language { get { return null; } }
+
             public void MarkComplete() { }
         }
     }

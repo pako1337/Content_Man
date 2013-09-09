@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContentDomain
 {
-    public interface IContentValue
+    public class Language
     {
-        ContentStatus Status { get; }
-        Language Language { get; }
-        void MarkComplete();
     }
 }

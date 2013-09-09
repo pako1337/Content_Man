@@ -12,6 +12,8 @@ namespace ContentDomain
 
         public string Value { get; private set; }
 
+        public Language Language { get { throw new NotImplementedException(); } }
+
         public void MarkComplete()
         {
             Status = ContentStatus.Complete;
