@@ -11,12 +11,5 @@ namespace ContentDomain.Test
 {
     public class LanguageTest
     {
-        [Fact]
-        public void should_return_the_same_object_when_getting_invariant_language()
-        {
-            var lang1 = Language.InvariantLanguage();
-            var lang2 = Language.InvariantLanguage();
-            lang1.Should().Be(lang2);
-        }
     }
 }
