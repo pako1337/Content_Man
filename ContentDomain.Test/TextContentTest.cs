@@ -56,7 +56,7 @@ namespace ContentDomain.Test
 
         private TextContent CreateEmptyTextContent()
         {
-            return new TextContent(new Language());
+            return new TextContent(new Language("pl-PL"));
         }
     }
 }
