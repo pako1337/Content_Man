@@ -14,7 +14,12 @@ namespace ContentDomain
 
         public string Value { get; private set; }
 
-        public Language Language { get { throw new NotImplementedException(); } }
+        public Language Language { get; private set; }
+
+        public TextContent(Language language)
+        {
+            Language = language;
+        }
 
         public void MarkComplete()
         {

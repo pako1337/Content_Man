@@ -48,9 +48,15 @@ namespace ContentDomain.Test
             content.Status.Should().Be(ContentStatus.Complete);
         }
 
+        [Fact]
+        public void should_have_language_assigned_at_all_times()
+        {
+            CreateEmptyTextContent().Language.Should().NotBeNull();
+        }
+
         private TextContent CreateEmptyTextContent()
         {
-            return new TextContent();
+            return new TextContent(new Language());
         }
     }
 }
