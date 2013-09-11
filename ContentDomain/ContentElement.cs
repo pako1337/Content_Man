@@ -11,6 +11,8 @@ namespace ContentDomain
     {
         private T _value;
 
+        public int Id { get; private set; }
+
         public void SetValue(T value)
         {
             if (value == null) throw new ArgumentNullException("value");

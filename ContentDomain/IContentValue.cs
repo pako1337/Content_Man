@@ -8,6 +8,7 @@ namespace ContentDomain
 {
     public interface IContentValue
     {
+        int Id { get; }
         ContentStatus Status { get; }
         Language Language { get; }
         void MarkComplete();

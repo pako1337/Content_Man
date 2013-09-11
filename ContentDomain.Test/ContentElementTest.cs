@@ -43,10 +43,9 @@ namespace ContentDomain.Test
 
         private class EmptyValueStub : IContentValue
         {
+            public int Id { get; set; }
             public ContentStatus Status { get { return ContentStatus.Draft; } }
-
             public Language Language { get { return null; } }
-
             public void MarkComplete() { }
         }
     }

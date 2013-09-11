@@ -8,6 +8,8 @@ namespace ContentDomain
 {
     public class TextContent : IContentValue
     {
+        public int Id { get; private set; }
+
         public ContentStatus Status { get; private set; }
 
         public string Value { get; private set; }

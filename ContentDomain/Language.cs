@@ -8,5 +8,7 @@ namespace ContentDomain
 {
     public class Language
     {
+        public bool IsRightToLeft { get; set; }
+        public string Name { get; set; }
     }
 }
