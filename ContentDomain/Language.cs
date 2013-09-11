@@ -8,8 +8,8 @@ namespace ContentDomain
 {
     public class Language
     {
-        public bool IsRightToLeft { get; set; }
-        public string Name { get; set; }
+        public bool IsRightToLeft { get; private set; }
+        public string Name { get; private set; }
         public string IsoCode { get; private set; }
     }
 }
