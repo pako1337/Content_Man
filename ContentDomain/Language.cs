@@ -10,5 +10,6 @@ namespace ContentDomain
     {
         public bool IsRightToLeft { get; set; }
         public string Name { get; set; }
+        public string IsoCode { get; private set; }
     }
 }
