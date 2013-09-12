@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,13 @@ namespace ContentDomain
         {
             if (!_languages.ContainsKey(isoCode))
             {
+                if (!string.Equals(Language.Invariant, isoCode, StringComparison.CurrentCultureIgnoreCase)
+                    &&
+                    CultureInfo
+                    .GetCultures(CultureTypes.AllCultures)
+                    .All(c => !string.Equals(c.Name, isoCode, StringComparison.CurrentCultureIgnoreCase)))
+                    throw new ArgumentException("Unknown iso code", "isoCode");
+
                 var language = new Language(isoCode);
                 _languages[isoCode] = language;
             }

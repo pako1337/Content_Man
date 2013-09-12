@@ -12,8 +12,9 @@ namespace ContentDomain.Test
         {
             yield return new[] { "pl-PL" };
             yield return new[] { "pl" };
-            yield return new[] { "en-UK" };
+            yield return new[] { "en-GB" };
             yield return new[] { "en" };
+            yield return new[] { "EN" };
             yield return new[] { Language.Invariant };
         }
 

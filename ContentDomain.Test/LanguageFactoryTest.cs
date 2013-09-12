@@ -29,6 +29,13 @@ namespace ContentDomain.Test
         }
 
         [Fact]
+        public void should_throw_when_unknown_language_passed()
+        {
+            var factory = new LanguageFactory();
+            Assert.Throws<ArgumentException>(() => factory.CreateLanguage("abc"));
+        }
+
+        [Fact]
         public void should_always_return_the_same_instance_for_the_same_iso_code()
         {
             var factory = new LanguageFactory();
