@@ -19,12 +19,13 @@ namespace ContentDomain.Test
             language1.Should().NotBeNull();
         }
 
-        [Fact]
-        public void should_create_language_with_iso_code_filled()
+        [Theory]
+        [ClassData(typeof(LanguageIsoCodeFactory))]
+        public void should_create_language_with_iso_code_filled(string langCode)
         {
             var factory = new LanguageFactory();
-            var language1 = factory.CreateLanguage("pl-PL");
-            language1.IsoCode.Should().Be("pl-PL");
+            var language1 = factory.CreateLanguage(langCode);
+            language1.IsoCode.Should().Be(langCode);
         }
 
         [Fact]
