@@ -13,6 +13,13 @@ namespace ContentDomain
 
         public int Id { get; private set; }
 
+        public Language DefaultLanguage { get; private set; }
+
+        public ContentElement(Language defaultLanguage)
+        {
+            DefaultLanguage = defaultLanguage;
+        }
+
         public void SetValue(T value)
         {
             if (value == null) throw new ArgumentNullException("value");

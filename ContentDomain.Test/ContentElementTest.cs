@@ -36,9 +36,15 @@ namespace ContentDomain.Test
             contentElement.GetValue().Should().Be(newValue);
         }
 
+        [Fact]
+        public void should_have_default_language()
+        {
+            CreateDefaultContentElement().DefaultLanguage.Should().NotBeNull();
+        }
+
         private ContentElement<EmptyValueStub> CreateDefaultContentElement()
         {
-            return new ContentElement<EmptyValueStub>();
+            return new ContentElement<EmptyValueStub>(new Language(Language.Invariant));
         }
 
         private class EmptyValueStub : IContentValue
