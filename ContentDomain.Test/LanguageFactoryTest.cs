@@ -33,11 +33,12 @@ namespace ContentDomain.Test
             Assert.Throws<ArgumentException>(() => Language.CreateLanguage("abc"));
         }
 
-        [Fact]
-        public void should_always_return_the_same_instance_for_the_same_iso_code()
+        [Theory]
+        [ClassData(typeof(LanguageIsoCodeFactory))]
+        public void should_always_return_the_same_instance_for_the_same_iso_code(string langCode)
         {
-            var language1 = Language.CreateLanguage("pl-PL");
-            var language2 = Language.CreateLanguage("pl-PL");
+            var language1 = Language.CreateLanguage(langCode);
+            var language2 = Language.CreateLanguage(langCode);
             language1.Should().Be(language2);
         }
     }
