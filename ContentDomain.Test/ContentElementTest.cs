@@ -7,6 +7,8 @@ namespace ContentDomain.Test
 {
     public class ContentElementTest
     {
+        Language _language = new Language(Language.Invariant);
+
         [Fact]
         public void should_be_created()
         {
@@ -23,15 +25,15 @@ namespace ContentDomain.Test
         [Fact]
         public void should_accept_value_when_not_null()
         {
-            CreateDefaultContentElement().SetValue(new EmptyValueStub());
+            CreateDefaultContentElement().SetValue(ValueStub.Create().WithLanguage(_language));
         }
 
         [Fact]
         public void should_overwrite_old_value_when_new_one_is_set()
         {
-            var newValue = new EmptyValueStub();
+            var newValue = ValueStub.Create().WithLanguage(_language);
             var contentElement = CreateDefaultContentElement();
-            contentElement.SetValue(new EmptyValueStub());
+            contentElement.SetValue(ValueStub.Create().WithLanguage(_language));
             contentElement.SetValue(newValue);
             contentElement.GetValue().Should().Be(newValue);
         }
@@ -42,17 +44,37 @@ namespace ContentDomain.Test
             CreateDefaultContentElement().DefaultLanguage.Should().NotBeNull();
         }
 
-        private ContentElement<EmptyValueStub> CreateDefaultContentElement()
+        [Fact]
+        public void should_throw_when_first_value_added_is_not_of_default_language()
         {
-            return new ContentElement<EmptyValueStub>(new Language(Language.Invariant));
+            var contentElement = CreateDefaultContentElement();
+            var content = ValueStub.Create().WithLanguage(new Language("en"));
+            Assert.Throws<ArgumentException>(() => contentElement.SetValue(content));
         }
 
-        private class EmptyValueStub : IContentValue
+        private ContentElement<ValueStub> CreateDefaultContentElement()
         {
-            public int Id { get; set; }
+            return new ContentElement<ValueStub>(_language);
+        }
+        
+        private class ValueStub : IContentValue
+        {
+            private Language _language = null;
+            public int Id { get; private set; }
             public ContentStatus Status { get { return ContentStatus.Draft; } }
-            public Language Language { get { return null; } }
+            public Language Language { get { return _language; } }
             public void MarkComplete() { }
+
+            public static ValueStub Create()
+            {
+                return new ValueStub();
+            }
+
+            public ValueStub WithLanguage(Language language)
+            {
+                _language = language;
+                return this;
+            }
         }
     }
 }

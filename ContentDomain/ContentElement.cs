@@ -22,7 +22,11 @@ namespace ContentDomain
 
         public void SetValue(T value)
         {
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null)
+                throw new ArgumentNullException("value");
+            if (_value == null && value.Language != DefaultLanguage)
+                throw new ArgumentException("First added value must be of default language", "value");
+
             _value = value;
         }
 
