@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace ContentDomain
     {
         public static readonly string Invariant = "Invariant";
 
+        private static Dictionary<string, Language> _languages = new Dictionary<string, Language>();
+
         public string IsoCode { get; private set; }
         public bool IsRightToLeft { get; private set; }
         public string Name { get; private set; }
@@ -17,6 +20,24 @@ namespace ContentDomain
         public Language(string isoCode)
         {
             this.IsoCode = isoCode;
+        }
+
+        public static Language CreateLanguage(string isoCode)
+        {
+            if (!_languages.ContainsKey(isoCode))
+            {
+                if (!string.Equals(Language.Invariant, isoCode, StringComparison.CurrentCultureIgnoreCase)
+                    &&
+                    CultureInfo
+                    .GetCultures(CultureTypes.AllCultures)
+                    .All(c => !string.Equals(c.Name, isoCode, StringComparison.CurrentCultureIgnoreCase)))
+                    throw new ArgumentException("Unknown iso code", "isoCode");
+
+                var language = new Language(isoCode);
+                _languages[isoCode] = language;
+            }
+
+            return _languages[isoCode];
         }
     }
 }
