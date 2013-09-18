@@ -7,8 +7,6 @@ namespace ContentDomain.Test
 {
     public class ContentElementTest
     {
-        Language _language = new Language(Language.Invariant);
-
         [Fact]
         public void should_be_created()
         {
@@ -25,15 +23,15 @@ namespace ContentDomain.Test
         [Fact]
         public void should_accept_value_when_not_null()
         {
-            CreateDefaultContentElement().SetValue(ValueStub.Create().WithLanguage(_language));
+            CreateDefaultContentElement().SetValue(ValueStub.Create().WithLanguage(Language.CreateLanguage(Language.Invariant)));
         }
 
         [Fact]
         public void should_overwrite_old_value_when_new_one_is_set()
         {
-            var newValue = ValueStub.Create().WithLanguage(_language);
+            var newValue = ValueStub.Create().WithLanguage(Language.CreateLanguage(Language.Invariant));
             var contentElement = CreateDefaultContentElement();
-            contentElement.SetValue(ValueStub.Create().WithLanguage(_language));
+            contentElement.SetValue(ValueStub.Create().WithLanguage(Language.CreateLanguage(Language.Invariant)));
             contentElement.SetValue(newValue);
             contentElement.GetValue().Should().Be(newValue);
         }
@@ -54,7 +52,7 @@ namespace ContentDomain.Test
 
         private ContentElement<ValueStub> CreateDefaultContentElement()
         {
-            return new ContentElement<ValueStub>(_language);
+            return new ContentElement<ValueStub>(Language.CreateLanguage(Language.Invariant));
         }
         
         private class ValueStub : IContentValue
