@@ -9,7 +9,7 @@ namespace ContentDomain
     public sealed class ContentElement<T>
         where T : class, IContentValue
     {
-        private T _value;
+        private Dictionary<Language, T> _values = new Dictionary<Language,T>();
 
         public int Id { get; private set; }
 
@@ -24,15 +24,20 @@ namespace ContentDomain
         {
             if (value == null)
                 throw new ArgumentNullException("value");
-            if (_value == null && value.Language != DefaultLanguage)
+            if (_values.Count == 0 && value.Language != DefaultLanguage)
                 throw new ArgumentException("First added value must be of default language", "value");
 
-            _value = value;
+            _values[value.Language] = value;
         }
 
         public T GetValue()
         {
-            return _value;
+            return _values.Values.First();
+        }
+
+        public IEnumerable<IContentValue> GetValues()
+        {
+            return _values.Values;
         }
     }
 }

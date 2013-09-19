@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Xunit;
 using FluentAssertions;
 using Xunit.Extensions;
@@ -48,6 +49,17 @@ namespace ContentDomain.Test
             var contentElement = CreateDefaultContentElement();
             var content = ValueStub.Create().WithLanguage(new Language("en"));
             Assert.Throws<ArgumentException>(() => contentElement.SetValue(content));
+        }
+
+        [Fact]
+        public void should_hold_multiple_values()
+        {
+            var contentElement = CreateDefaultContentElement();
+            var content1 = ValueStub.Create().WithLanguage(Language.CreateLanguage(Language.Invariant));
+            var content2 = ValueStub.Create().WithLanguage(Language.CreateLanguage("en"));
+            contentElement.SetValue(content1);
+            contentElement.SetValue(content2);
+            contentElement.GetValues().Count().Should().Be(2);
         }
 
         private ContentElement<ValueStub> CreateDefaultContentElement()
