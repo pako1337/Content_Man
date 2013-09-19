@@ -43,7 +43,7 @@ namespace ContentDomain
             return string.Equals(this.IsoCode, other.IsoCode, StringComparison.OrdinalIgnoreCase);
         }
 
-        public static Language CreateLanguage(string isoCode)
+        public static Language Create(string isoCode)
         {
             if (!_languages.ContainsKey(isoCode))
             {
