@@ -32,6 +32,10 @@ namespace ContentDomain
 
         public T GetValue(Language language)
         {
+            if (!_values.ContainsKey(language))
+                throw new ArgumentException(
+                    string.Format("Value for language {0} not present", language.Name),
+                    "language");
             return _values[language];
         }
 

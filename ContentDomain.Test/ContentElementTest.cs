@@ -62,6 +62,12 @@ namespace ContentDomain.Test
             contentElement.GetValues().Count().Should().Be(2);
         }
 
+        [Fact]
+        public void should_throw_when_trying_to_get_not_existing_value()
+        {
+            Assert.Throws<ArgumentException>(() => CreateDefaultContentElement().GetValue(Language.CreateLanguage(Language.Invariant)));
+        }
+
         private ContentElement<ValueStub> CreateDefaultContentElement()
         {
             return new ContentElement<ValueStub>(Language.CreateLanguage(Language.Invariant));
