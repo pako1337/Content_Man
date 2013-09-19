@@ -34,7 +34,7 @@ namespace ContentDomain.Test
             var contentElement = CreateDefaultContentElement();
             contentElement.SetValue(ValueStub.Create().WithLanguage(Language.CreateLanguage(Language.Invariant)));
             contentElement.SetValue(newValue);
-            contentElement.GetValue().Should().Be(newValue);
+            contentElement.GetValue(Language.CreateLanguage(Language.Invariant)).Should().Be(newValue);
         }
 
         [Fact]

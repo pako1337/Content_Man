@@ -30,9 +30,9 @@ namespace ContentDomain
             _values[value.Language] = value;
         }
 
-        public T GetValue()
+        public T GetValue(Language language)
         {
-            return _values.Values.First();
+            return _values[language];
         }
 
         public IEnumerable<IContentValue> GetValues()
