@@ -51,5 +51,17 @@ namespace ContentDomain.Test
             var language2 = Language.Create(langCode);
             language1.Should().Be(language2);
         }
+
+        [Fact]
+        public void should_return_false_when_comparing_language_with_other_type()
+        {
+            Language.Create(Language.Invariant).Equals(1).Should().BeFalse();
+        }
+
+        [Fact]
+        public void should_return_false_when_comparing_to_different_language()
+        {
+            Language.Create(Language.Invariant).Equals(Language.Create("en")).Should().BeFalse();
+        }
     }
 }

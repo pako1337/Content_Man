@@ -24,23 +24,18 @@ namespace ContentDomain
 
         public override bool Equals(object obj)
         {
-            if (obj == null || GetType() != obj.GetType())
-                return false;
-
-            var other = obj as Language;
-            if (other == null) return false;
-            return Equals(other);
-        }
-
-        public override int GetHashCode()
-        {
-            return this.IsoCode.ToLower().GetHashCode();
+            return Equals(obj as Language);
         }
 
         public bool Equals(Language other)
         {
             if (other == null) return false;
             return string.Equals(this.IsoCode, other.IsoCode, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.IsoCode.ToLower().GetHashCode();
         }
 
         public static Language Create(string isoCode)
