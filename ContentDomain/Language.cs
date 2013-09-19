@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ContentDomain
 {
-    public sealed class Language
+    public sealed class Language : IEquatable<Language>
     {
         public static readonly string Invariant = "Invariant";
 
@@ -20,6 +20,27 @@ namespace ContentDomain
         public Language(string isoCode)
         {
             this.IsoCode = isoCode;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            var other = obj as Language;
+            if (other == null) return false;
+            return Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.IsoCode.ToLower().GetHashCode();
+        }
+
+        public bool Equals(Language other)
+        {
+            if (other == null) return false;
+            return string.Equals(this.IsoCode, other.IsoCode, StringComparison.OrdinalIgnoreCase);
         }
 
         public static Language CreateLanguage(string isoCode)
