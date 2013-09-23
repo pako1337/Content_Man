@@ -9,9 +9,11 @@ namespace ContentDomain
 {
     public sealed class Language : IEquatable<Language>
     {
-        public static readonly string Invariant = "Invariant";
+        public static readonly string InvariantCode = "Invariant";
 
         private static Dictionary<string, Language> _languages = new Dictionary<string, Language>();
+
+        public static Language Invariant { get { return Language.Create(Language.InvariantCode); } }
 
         public string IsoCode { get; private set; }
         public bool IsRightToLeft { get; private set; }
@@ -42,7 +44,7 @@ namespace ContentDomain
         {
             if (!_languages.ContainsKey(isoCode))
             {
-                if (!string.Equals(Language.Invariant, isoCode, StringComparison.CurrentCultureIgnoreCase)
+                if (!string.Equals(Language.InvariantCode, isoCode, StringComparison.CurrentCultureIgnoreCase)
                     &&
                     CultureInfo
                     .GetCultures(CultureTypes.AllCultures)

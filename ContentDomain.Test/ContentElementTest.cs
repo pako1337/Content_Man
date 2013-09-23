@@ -24,17 +24,17 @@ namespace ContentDomain.Test
         [Fact]
         public void should_accept_value_when_not_null()
         {
-            CreateDefaultContentElement().SetValue(ValueStub.Create().WithLanguage(Language.Create(Language.Invariant)));
+            CreateDefaultContentElement().SetValue(ValueStub.Create().WithLanguage(Language.Invariant));
         }
 
         [Fact]
         public void should_overwrite_old_value_when_new_one_is_set()
         {
-            var newValue = ValueStub.Create().WithLanguage(Language.Create(Language.Invariant));
+            var newValue = ValueStub.Create().WithLanguage(Language.Invariant);
             var contentElement = CreateDefaultContentElement();
-            contentElement.SetValue(ValueStub.Create().WithLanguage(Language.Create(Language.Invariant)));
+            contentElement.SetValue(ValueStub.Create().WithLanguage(Language.Invariant));
             contentElement.SetValue(newValue);
-            contentElement.GetValue(Language.Create(Language.Invariant)).Should().Be(newValue);
+            contentElement.GetValue(Language.Invariant).Should().Be(newValue);
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace ContentDomain.Test
         public void should_hold_multiple_values()
         {
             var contentElement = CreateDefaultContentElement();
-            var content1 = ValueStub.Create().WithLanguage(Language.Create(Language.Invariant));
+            var content1 = ValueStub.Create().WithLanguage(Language.Invariant);
             var content2 = ValueStub.Create().WithLanguage(Language.Create("en"));
             contentElement.SetValue(content1);
             contentElement.SetValue(content2);
@@ -65,12 +65,12 @@ namespace ContentDomain.Test
         [Fact]
         public void should_throw_when_trying_to_get_not_existing_value()
         {
-            Assert.Throws<ArgumentException>(() => CreateDefaultContentElement().GetValue(Language.Create(Language.Invariant)));
+            Assert.Throws<ArgumentException>(() => CreateDefaultContentElement().GetValue(Language.Invariant));
         }
 
         private ContentElement<ValueStub> CreateDefaultContentElement()
         {
-            return new ContentElement<ValueStub>(Language.Create(Language.Invariant));
+            return new ContentElement<ValueStub>(Language.Invariant);
         }
         
         private class ValueStub : IContentValue

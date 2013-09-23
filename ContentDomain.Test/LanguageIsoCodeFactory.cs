@@ -15,7 +15,7 @@ namespace ContentDomain.Test
             yield return new[] { "en-GB" };
             yield return new[] { "en" };
             yield return new[] { "EN" };
-            yield return new[] { Language.Invariant };
+            yield return new[] { Language.InvariantCode };
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()

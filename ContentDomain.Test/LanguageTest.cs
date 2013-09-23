@@ -55,13 +55,19 @@ namespace ContentDomain.Test
         [Fact]
         public void should_return_false_when_comparing_language_with_other_type()
         {
-            Language.Create(Language.Invariant).Equals(1).Should().BeFalse();
+            Language.Invariant.Equals(1).Should().BeFalse();
         }
 
         [Fact]
         public void should_return_false_when_comparing_to_different_language()
         {
-            Language.Create(Language.Invariant).Equals(Language.Create("en")).Should().BeFalse();
+            Language.Invariant.Equals(Language.Create("en")).Should().BeFalse();
+        }
+
+        [Fact]
+        public void should_return_invariant_language_by_static_property()
+        {
+            Language.Invariant.IsoCode.Should().Be(Language.InvariantCode);
         }
     }
 }
