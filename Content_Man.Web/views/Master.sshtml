@@ -1,0 +1,11 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Content Man</title>
+	@Section['Header']
+</head>
+<body>
+<h1>Content Man to the rescue!</h1>
+	@Section['Content']
+</body>
+</html>
