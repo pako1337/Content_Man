@@ -2,6 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Content Man</title>
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="../Scripts/ui-bootstrap-tpls-0.6.0.min.js"></script>
+    <link href="../Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
 	@Section['Header']
 </head>
 <body>
