@@ -5,10 +5,10 @@
     <script src="../Scripts/angular.min.js"></script>
     <script src="../Scripts/ui-bootstrap-tpls-0.6.0.min.js"></script>
     <link href="../Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
-	@Section['Header']
+    @Section['Header']
 </head>
 <body>
-<h1>Content Man to the rescue!</h1>
-	@Section['Content']
+    <h1>Content Man to the rescue!</h1>
+    @Section['Content']
 </body>
 </html>

@@ -9,7 +9,7 @@ namespace Content_Man.Web
     {
         public Content() : base("/")
         {
-            Get["Content"] = _ => View["Content"];
+            Get["{section}"] = param => View[param.section];
         }
     }
 }
