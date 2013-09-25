@@ -1,5 +1,12 @@
 ﻿@Master['Master']
 
+@Section['Header']
+<script type="text/javascript" src="../Scripts/Content.js"></script>
+@EndSection
+
 @Section['Content']
 <h3>Content!</h3>
+<div class="col-lg-10">
+    <div class=""></div>
+</div>
 @EndSection

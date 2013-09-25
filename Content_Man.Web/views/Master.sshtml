@@ -1,21 +1,26 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app>
 <head>
     <title>Content Man</title>
-    <script src="../Scripts/lib/angular.min.js"></script>
-    <script src="../Scripts/lib/ui-bootstrap-tpls-0.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="../Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
     @Section['Header']
 </head>
 <body>
-    <div class="col-lg-12 text-center">
-        <h1>Content Man to the rescue!</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h1>Content Man to the rescue!</h1>
+            </div>
+            <div class="col-sm-3">
+                Menu?
+            </div>
+            <div class="col-sm-9">
+                @Section['Content']
+            </div>
+        </div>
     </div>
-    <div class="col-lg-3">
-        Menu?
-    </div>
-    <div class="col-lg-9">
-        @Section['Content']
-    </div>
+    <script src="../Scripts/lib/angular.min.js"></script>
+    <script src="../Scripts/lib/ui-bootstrap-tpls-0.6.0.min.js"></script>
 </body>
 </html>
