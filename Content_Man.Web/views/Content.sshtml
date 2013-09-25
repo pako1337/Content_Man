@@ -1,12 +1,26 @@
 ﻿@Master['Master']
 
-@Section['Header']
-<script type="text/javascript" src="../Scripts/Content.js"></script>
+@Section['Content']
+<div class="col-sm-12">
+    <h3>Content!</h3>
+</div>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-sm-7 col-xs-12">Default Value Don't want your columns to simply stack in smaller devices? Use the extra small and medium device grid classes by adding .col-xs-* .col-md-* to your columns. See the example below for a better idea of how it all works.</div>
+        <div class="col-sm-3 col-xs-12">
+            <div class="row col-xs-12">Language</div>
+            <div class="row col-xs-12">Category</div>
+        </div>
+        <div class="col-sm-1 col-xs-4">
+            <button type="button" class="btn btn-primary btn-xs">Edit</button>
+        </div>
+        <div class="col-sm-1 col-xs-4">
+            <button type="button" class="btn btn-danger btn-xs">Delete</button>
+        </div>
+    </div>
+</div>
 @EndSection
 
-@Section['Content']
-<h3>Content!</h3>
-<div class="col-lg-10">
-    <div class=""></div>
-</div>
+@Section['Scripts']
+<script type="text/javascript" src="../Scripts/Content.js"></script>
 @EndSection

@@ -22,5 +22,6 @@
     </div>
     <script src="../Scripts/lib/angular.min.js"></script>
     <script src="../Scripts/lib/ui-bootstrap-tpls-0.6.0.min.js"></script>
+    @Section['Scripts']
 </body>
 </html>
