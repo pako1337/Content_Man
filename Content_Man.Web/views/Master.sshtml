@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Content Man</title>
-    <script src="../Scripts/angular.min.js"></script>
-    <script src="../Scripts/ui-bootstrap-tpls-0.6.0.min.js"></script>
+    <script src="../Scripts/lib/angular.min.js"></script>
+    <script src="../Scripts/lib/ui-bootstrap-tpls-0.6.0.min.js"></script>
     <link href="../Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
     @Section['Header']
 </head>
@@ -11,7 +11,10 @@
     <div class="col-lg-12 text-center">
         <h1>Content Man to the rescue!</h1>
     </div>
-    <div class="col-lg-9 col-lg-offset-3">
+    <div class="col-lg-3">
+        Menu?
+    </div>
+    <div class="col-lg-9">
         @Section['Content']
     </div>
 </body>
