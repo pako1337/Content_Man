@@ -6,15 +6,15 @@
 </div>
 <div class="col-md-12">
     <div class="row">
-        <div class="col-sm-7 col-xs-12">Default Value Don't want your columns to simply stack in smaller devices? Use the extra small and medium device grid classes by adding .col-xs-* .col-md-* to your columns. See the example below for a better idea of how it all works.</div>
-        <div class="col-sm-3 col-xs-12">
+        <div class="col-lg-7 col-xs-12">Default Value Don't want your columns to simply stack in smaller devices? Use the extra small and medium device grid classes by adding .col-xs-* .col-md-* to your columns. See the example below for a better idea of how it all works.</div>
+        <div class="col-lg-3 col-xs-12">
             <div class="row col-xs-12">Language</div>
             <div class="row col-xs-12">Category</div>
         </div>
-        <div class="col-sm-1 col-xs-4">
+        <div class="col-lg-1 col-xs-4">
             <button type="button" class="btn btn-primary btn-xs">Edit</button>
         </div>
-        <div class="col-sm-1 col-xs-4">
+        <div class="col-lg-1 col-xs-4">
             <button type="button" class="btn btn-danger btn-xs">Delete</button>
         </div>
     </div>
