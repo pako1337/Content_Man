@@ -1,4 +1,11 @@
-﻿function ContentList($scope) {
+﻿angular.module('Content', [])
+    .config(function ($routeProvider) {
+        $routeProvider
+            .when('/', { controller: ContentList, templateUrl: 'ContentList.html' })
+            .otherwise({ redirectTo: '/' });
+    });
+
+function ContentList($scope) {
     $scope.contentElements = [
         { contentId: 1, Language: 'English', Category: 'Generic', Value: "Na pokładowym chronometrze zwanej przez załogę Latającą Holerą transgalaktycznej pirackiej łajby Małpilus dochodziła godzina dwudziesta pierwsza, gdy wydarzył się ten wypadek. Sam w sobie nie miał wielkiego znaczenia - ot, drobny błąd nawigatora, cała sprawa mogłaby spokojnie obyć się bez konsekwencji. Traf chciał jednak, iż autorzy uczonych ksiąg, które miały dopiero powstać, uznali tę właśnie chwilę za przełomową w dziejach Trzeciej Ery. Nam zaś wszakże nie wypada się spierać z historią. Zamilknijmy przeto i pozwólmy jej mówić własnymi słowy... " },
         { contentId: 1, Language: 'English', Category: 'Generic', Value: "Planetoida pojawiła się znienacka i nie wiadomo skąd. Wychynęła z mroku z prędkością teraźniejszości, jak zapewne określiłby to poetycko któryś z pierwszych bywalców forum „Science Fiction, Fantasy i Horror” (z czasów zanim jeszcze periodyk wszedł do kanonu akademickich podręczników). Jej chropowata kulista powierzchnia majaczyła teraz gdzieś w okolicach przedniej szyby, cały czas niepokojąco przybierając na wielkości. Tutaj trzeba było działać szybko. " },

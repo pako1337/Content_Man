@@ -1,29 +1,11 @@
 ﻿@Master['Master']
 
 @Section['Content']
-<div ng-app ng-controller="ContentList">
+<div ng-app="Content">
     <div class="col-sm-12">
         <h3>Content!</h3>
     </div>
-    <div class="col-md-12">
-        <div class="row" ng-repeat="element in contentElements">
-            <div class="row">
-                <div class="col-lg-7 col-xs-12">{{element.Value}}</div>
-                <div class="col-lg-3 col-xs-12">
-                    <div class="row col-xs-12">{{element.Language}}</div>
-                    <div class="row col-xs-12">{{element.Category}}</div>
-                </div>
-                <div class="col-lg-1 col-xs-4">
-                    <button type="button" class="btn btn-primary btn-xs">Edit</button>
-                </div>
-                <div class="col-lg-1 col-xs-4">
-                    <button type="button" class="btn btn-danger btn-xs">Delete</button>
-                </div>
-            </div>
-            <div class="row">
-                <hr />
-            </div>
-        </div>
+    <div class="col-md-12" ng-view>
     </div>
 </div>
 @EndSection
