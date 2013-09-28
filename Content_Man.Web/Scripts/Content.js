@@ -11,11 +11,20 @@ function ContentList($scope, $http) {
 
     $http({ method: 'GET', url: '/api/ContentElement' })
         .success(function (data, status, headers, config) {
-            $scope.contentElements = data;
+            data.forEach(function (element) {
+                    var ce = new ContentElement(element.Id, element.DefaultLanguage, element.Values);
+                    $scope.contentElements.push(ce);
+                })
         })
         .error(function (data, status, headers, config) {
             alert("Oh my! Something not nice has happened");
         });
+
+    function ContentElement(id, language, values) {
+        this.Id = id;
+        this.Language = language;
+        this.Values = values
+    }
 }
 
 function ContentEdit($scope, $routeParams) {
