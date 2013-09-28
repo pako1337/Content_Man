@@ -1,12 +1,12 @@
 ﻿<div class="row" ng-repeat="element in contentElements">
     <div class="row">
-        <div class="col-lg-7 col-xs-12">{{element.Value}}</div>
+        <div class="col-lg-7 col-xs-12">{{element.Values[0].Value}}</div>
         <div class="col-lg-3 col-xs-12">
-            <div class="row col-xs-12">{{element.Language}}</div>
+            <div class="row col-xs-12">{{element.DefaultLanguage.IsoCode}}</div>
             <div class="row col-xs-12">{{element.Category}}</div>
         </div>
         <div class="col-lg-1 col-xs-4">
-            <a href="#/edit/{{element.contentId}}" class="btn btn-primary btn-xs">Edit</a>
+            <a href="#/edit/{{element.Id}}" class="btn btn-primary btn-xs">Edit</a>
         </div>
         <div class="col-lg-1 col-xs-4">
             <a href="#/delete" class="btn btn-danger btn-xs">Delete</a>
