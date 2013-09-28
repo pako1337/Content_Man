@@ -18,11 +18,14 @@ namespace Content_Man.Web.api
                 textContent.SetValue("text");
                 ce.SetValue(textContent);
 
-                var obj = new
+                var obj = new[]
                 {
-                    Id = ce.Id,
-                    DefaultLanguage = ce.DefaultLanguage,
-                    Values = ce.GetValues()
+                    new
+                    {
+                        Id = ce.Id,
+                        DefaultLanguage = ce.DefaultLanguage,
+                        Values = ce.GetValues()
+                    }
                 };
 
                 var serializer = new Nancy.Json.JavaScriptSerializer();

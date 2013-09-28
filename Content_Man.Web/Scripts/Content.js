@@ -11,7 +11,7 @@ function ContentList($scope, $http) {
 
     $http({ method: 'GET', url: '/api/ContentElement' })
         .success(function (data, status, headers, config) {
-            $scope.contentElements.push(data);
+            $scope.contentElements = data;
         })
         .error(function (data, status, headers, config) {
             alert("Oh my! Something not nice has happened");
