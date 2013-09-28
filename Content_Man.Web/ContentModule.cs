@@ -5,9 +5,9 @@ using System.Web;
 
 namespace Content_Man.Web
 {
-    public class Content : Nancy.NancyModule
+    public class ContentModule : Nancy.NancyModule
     {
-        public Content() : base("/")
+        public ContentModule() : base("/")
         {
             Get[""] = _ => View["Content"];
             Get["{section}"] = param => View[param.section];
