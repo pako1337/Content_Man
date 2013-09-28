@@ -22,23 +22,27 @@ function ContentList($scope, $http) {
 
     function ContentElement(id, language, values) {
         this.Id = id;
-        this.Language = language;
         this.Values = values;
-        this.Languages = function () {
+        this.SelectedValue;
+        this.Languages = (function (values) {
             var languages = [];
-            for (var i = 0; i < this.Values.length; i++) {
-                languages.push(this.Values[i].Language);
-            }
+            for (var i = 0; i < values.length; i++)
+                languages.push(values[i].Language);
 
             return languages;
+        })(this.Values);
+
+        this.changeLanguage = function (isoCode) {
+            this.SelectedValue = findValueWithLanguage(this.Values, isoCode);
         };
 
-        this.SelectedValue = function () {
-            for (var i = 0; i < this.Values.length; i++) {
-                if (this.Values[i].Language.IsoCode === this.Language.IsoCode)
-                    return this.Values[i];
-            }
-        };
+        this.changeLanguage(language.IsoCode);
+
+        function findValueWithLanguage(values, isoCode) {
+            for (var i = 0; i < values.length; i++)
+                if (values[i].Language.IsoCode === isoCode)
+                    return values[i];
+        }
     }
 }
 
