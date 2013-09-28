@@ -18,5 +18,5 @@ function ContentList($scope) {
 }
 
 function ContentEdit($scope, $routeParams) {
-    $scope.contentId = $routeParams.contentId;
+    $scope.contentElement = { contentId: $routeParams.contentId, Language: 'English', Category: 'Generic', Value: "Na pokładowym chronometrze zwanej przez załogę Latającą Holerą transgalaktycznej pirackiej łajby Małpilus dochodziła godzina dwudziesta pierwsza, gdy wydarzył się ten wypadek. Sam w sobie nie miał wielkiego znaczenia - ot, drobny błąd nawigatora, cała sprawa mogłaby spokojnie obyć się bez konsekwencji. Traf chciał jednak, iż autorzy uczonych ksiąg, które miały dopiero powstać, uznali tę właśnie chwilę za przełomową w dziejach Trzeciej Ery. Nam zaś wszakże nie wypada się spierać z historią. Zamilknijmy przeto i pozwólmy jej mówić własnymi słowy... " }
 }
