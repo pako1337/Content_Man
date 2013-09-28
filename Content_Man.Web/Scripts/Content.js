@@ -23,7 +23,13 @@ function ContentList($scope, $http) {
     function ContentElement(id, language, values) {
         this.Id = id;
         this.Language = language;
-        this.Values = values
+        this.Values = values;
+        this.SelectedValue = function () {
+            for (var i = 0; i < this.Values.length; i++) {
+                if (this.Values[i].Language.IsoCode === this.Language.IsoCode)
+                    return this.Values[i];
+            }
+        };
     }
 }
 

@@ -15,7 +15,11 @@ namespace Content_Man.Web.api
             {
                 var ce = new ContentElement<TextContent>(Language.Invariant);
                 var textContent = new TextContent(Language.Invariant);
-                textContent.SetValue("text");
+                textContent.SetValue("text invariant");
+                ce.SetValue(textContent);
+
+                textContent = new TextContent(Language.Create("en-GB"));
+                textContent.SetValue("text in english");
                 ce.SetValue(textContent);
 
                 var obj = new[]
