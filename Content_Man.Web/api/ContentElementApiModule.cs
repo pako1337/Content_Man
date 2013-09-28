@@ -6,9 +6,9 @@ using Nancy;
 
 namespace Content_Man.Web.api
 {
-    public class ContentElement : Nancy.NancyModule
+    public class ContentElementApiModule : Nancy.NancyModule
     {
-        public ContentElement() : base("api/ContentElement")
+        public ContentElementApiModule() : base("api/ContentElement")
         {
             Get["/"] = _ =>
             {
