@@ -1,4 +1,4 @@
-﻿angular.module('Content', [])
+﻿angular.module('Content', ['ui.bootstrap'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', { controller: ContentList, templateUrl: 'ContentList.html' })
@@ -24,6 +24,15 @@ function ContentList($scope, $http) {
         this.Id = id;
         this.Language = language;
         this.Values = values;
+        this.Languages = function () {
+            var languages = [];
+            for (var i = 0; i < this.Values.length; i++) {
+                languages.push(this.Values[i].Language);
+            }
+
+            return languages;
+        };
+
         this.SelectedValue = function () {
             for (var i = 0; i < this.Values.length; i++) {
                 if (this.Values[i].Language.IsoCode === this.Language.IsoCode)
