@@ -9,7 +9,8 @@ namespace Content_Man.Web.api
 {
     public class ContentElementApiModule : Nancy.NancyModule
     {
-        public ContentElementApiModule() : base("api/ContentElement")
+        public ContentElementApiModule()
+            : base("api/ContentElement")
         {
             Get["/"] = _ =>
             {
@@ -22,19 +23,8 @@ namespace Content_Man.Web.api
                 textContent.SetValue("text in english");
                 ce.SetValue(textContent);
 
-                var obj = new[]
-                {
-                    new
-                    {
-                        Id = ce.Id,
-                        DefaultLanguage = ce.DefaultLanguage,
-                        Values = ce.GetValues()
-                    }
-                };
-
-                var serializer = new Nancy.Json.JavaScriptSerializer();
-                var ceString = serializer.Serialize(obj);
-                var bytes = System.Text.Encoding.UTF8.GetBytes(ceString);
+                var list = new[] { ce };
+                var bytes = list.ToJson();
 
                 return new Response()
                     {
@@ -42,6 +32,26 @@ namespace Content_Man.Web.api
                         Contents = s => s.Write(bytes, 0, bytes.Length)
                     };
             };
+        }
+    }
+
+    internal static class ContentElementExtension
+    {
+        public static byte[] ToJson<T>(this IEnumerable<ContentElement<T>> elements) where T : class, IContentValue
+        {
+            var jsonModel = elements.Select(ce =>
+                new
+                {
+                    Id = ce.Id,
+                    DefaultLanguage = ce.DefaultLanguage,
+                    Values = ce.GetValues()
+                });
+
+            var serializer = new Nancy.Json.JavaScriptSerializer();
+            var ceString = serializer.Serialize(jsonModel);
+            var bytes = System.Text.Encoding.UTF8.GetBytes(ceString);
+
+            return bytes;
         }
     }
 }
