@@ -70,7 +70,7 @@ namespace ContentDomain.Test
 
         private ContentElement<ValueStub> CreateDefaultContentElement()
         {
-            return new ContentElement<ValueStub>(Language.Invariant);
+            return new ContentElement<ValueStub>(0, Language.Invariant);
         }
         
         private class ValueStub : IContentValue

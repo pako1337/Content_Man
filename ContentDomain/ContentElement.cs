@@ -15,8 +15,9 @@ namespace ContentDomain
 
         public Language DefaultLanguage { get; private set; }
 
-        public ContentElement(Language defaultLanguage)
+        public ContentElement(int id, Language defaultLanguage)
         {
+            Id = id;
             DefaultLanguage = defaultLanguage;
         }
 

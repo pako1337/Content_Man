@@ -14,7 +14,8 @@ namespace Content_Man.Web.api
         {
             Get["/"] = _ =>
             {
-                var ce = new ContentElement<TextContent>(Language.Invariant);
+                var list = new List<ContentElement<TextContent>>();
+                var ce = new ContentElement<TextContent>(0, Language.Invariant);
                 var textContent = new TextContent(Language.Invariant);
                 textContent.SetValue("text invariant");
                 ce.SetValue(textContent);
@@ -23,7 +24,19 @@ namespace Content_Man.Web.api
                 textContent.SetValue("text in english");
                 ce.SetValue(textContent);
 
-                var list = new[] { ce };
+                list.Add(ce);
+
+                ce = new ContentElement<TextContent>(1, Language.Invariant);
+                textContent = new TextContent(Language.Invariant);
+                textContent.SetValue("adsfasdfasdf asdfasdfasdf asdf asdf dasf dasfdasf");
+                ce.SetValue(textContent);
+
+                textContent = new TextContent(Language.Create("en-GB"));
+                textContent.SetValue("eng dasfasdfas dfsdfas dfs dfas dfas dfas dfas");
+                ce.SetValue(textContent);
+
+                list.Add(ce);
+
                 var bytes = list.ToJson();
 
                 return new Response()
