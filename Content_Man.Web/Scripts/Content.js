@@ -6,6 +6,8 @@
             .otherwise({ redirectTo: '/' });
     });
 
+var contentElements = [];
+
 function ContentList($scope, $http) {
     $scope.contentElements = [];
 
@@ -13,8 +15,10 @@ function ContentList($scope, $http) {
         .success(function (data, status, headers, config) {
             data.forEach(function (element) {
                     var ce = new ContentElement(element.Id, element.DefaultLanguage, element.Values);
-                    $scope.contentElements.push(ce);
-                })
+                    contentElements.push(ce);
+            })
+
+            $scope.contentElements = contentElements;
         })
         .error(function (data, status, headers, config) {
             alert("Oh my! Something not nice has happened");
@@ -22,7 +26,12 @@ function ContentList($scope, $http) {
 }
 
 function ContentEdit($scope, $routeParams) {
-    $scope.contentElement = { contentId: $routeParams.contentId, Language: 'English', Category: 'Generic', Value: "Na pokładowym chronometrze zwanej przez załogę Latającą Holerą transgalaktycznej pirackiej łajby Małpilus dochodziła godzina dwudziesta pierwsza, gdy wydarzył się ten wypadek. Sam w sobie nie miał wielkiego znaczenia - ot, drobny błąd nawigatora, cała sprawa mogłaby spokojnie obyć się bez konsekwencji. Traf chciał jednak, iż autorzy uczonych ksiąg, które miały dopiero powstać, uznali tę właśnie chwilę za przełomową w dziejach Trzeciej Ery. Nam zaś wszakże nie wypada się spierać z historią. Zamilknijmy przeto i pozwólmy jej mówić własnymi słowy... " }
+    $scope.contentElement = (function () {
+        for (var i = 0; i < contentElements.length; i++) {
+            if (contentElements[i].Id == $routeParams.contentId)
+                return contentElements[i];
+        }
+    })();
 }
 
 function ContentElement(id, language, values) {
