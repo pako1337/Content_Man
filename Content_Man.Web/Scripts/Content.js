@@ -9,20 +9,22 @@
 var contentElements = [];
 
 function ContentList($scope, $http) {
-    $scope.contentElements = [];
+    $scope.contentElements = contentElements;
 
-    $http({ method: 'GET', url: '/api/ContentElement' })
-        .success(function (data, status, headers, config) {
-            data.forEach(function (element) {
+    if ($scope.contentElements.length == 0) {
+        $http({ method: 'GET', url: '/api/ContentElement' })
+            .success(function (data, status, headers, config) {
+                data.forEach(function (element) {
                     var ce = new ContentElement(element.Id, element.DefaultLanguage, element.Values);
                     contentElements.push(ce);
-            })
+                })
 
-            $scope.contentElements = contentElements;
-        })
-        .error(function (data, status, headers, config) {
-            alert("Oh my! Something not nice has happened");
-        });
+                $scope.contentElements = contentElements;
+            })
+            .error(function (data, status, headers, config) {
+                alert("Oh my! Something not nice has happened");
+            });
+    }
 }
 
 function ContentEdit($scope, $routeParams) {
