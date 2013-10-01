@@ -1,4 +1,4 @@
-﻿angular.module('Content', ['ui.bootstrap'])
+﻿var ContentModule = angular.module('Content', ['ui.bootstrap'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', { controller: ContentList, templateUrl: 'ContentList.html' })
@@ -6,32 +6,38 @@
             .otherwise({ redirectTo: '/' });
     });
 
-var contentElements = [];
-
-function ContentList($scope, $http) {
-    $scope.contentElements = contentElements;
-
-    if ($scope.contentElements.length == 0) {
-        $http({ method: 'GET', url: '/api/ContentElement' })
-            .success(function (data, status, headers, config) {
-                data.forEach(function (element) {
-                    var ce = new ContentElement(element.Id, element.DefaultLanguage, element.Values);
-                    contentElements.push(ce);
+ContentModule.factory('contentProvider', function ($http) {
+    return {
+        contentElements: [],
+        getContentElements: function () {
+            var that = this;
+            $http({ method: 'GET', url: '/api/ContentElement' })
+                .success(function (data, status, headers, config) {
+                    that.contentElements.length = 0;
+                    data.forEach(function (element) {
+                        var ce = new ContentElement(element.Id, element.DefaultLanguage, element.Values);
+                        that.contentElements.push(ce);
+                    })
                 })
+                .error(function (data, status, headers, config) {
+                    alert("Oh my! We have a sittuation here!");
+                });
+        }
+    };
+});
 
-                $scope.contentElements = contentElements;
-            })
-            .error(function (data, status, headers, config) {
-                alert("Oh my! Something not nice has happened");
-            });
-    }
+function ContentList($scope, contentProvider) {
+    $scope.contentElements = contentProvider.contentElements;
+
+    if (contentProvider.contentElements.length == 0)
+        contentProvider.getContentElements();
 }
 
-function ContentEdit($scope, $routeParams) {
+function ContentEdit($scope, $routeParams, contentProvider) {
     $scope.contentElement = (function () {
-        for (var i = 0; i < contentElements.length; i++) {
-            if (contentElements[i].Id == $routeParams.contentId)
-                return contentElements[i];
+        for (var i = 0; i < contentProvider.contentElements.length; i++) {
+            if (contentProvider.contentElements[i].Id == $routeParams.contentId)
+                return contentProvider.contentElements[i];
         }
     })();
 }
