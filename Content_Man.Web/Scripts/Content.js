@@ -11,7 +11,7 @@ ContentModule.factory('contentProvider', function ($http) {
         contentElements: [],
         getContentElements: function () {
             var that = this;
-            $http({ method: 'GET', url: '/api/ContentElement' })
+            $http.get('/api/ContentElement')
                 .success(function (data, status, headers, config) {
                     that.contentElements.length = 0;
                     data.forEach(function (element) {
@@ -21,6 +21,18 @@ ContentModule.factory('contentProvider', function ($http) {
                 })
                 .error(function (data, status, headers, config) {
                     alert("Oh my! We have a sittuation here!");
+                });
+        },
+
+        getcontentElement: function (elementId, elementReady) {
+            var that = this;
+            $http.get('api/ContentElement/' + elementId)
+                .success(function (data, status, headers, config) {
+                    var ce = new ContentElement(data.Id, data.DefaultLanguage, data.Values);
+                    elementReady(ce);
+                })
+                .error(function (data, status, headers, config) {
+                    alert("Oh my!");
                 });
         }
     };
@@ -35,10 +47,13 @@ function ContentList($scope, contentProvider) {
 
 function ContentEdit($scope, $routeParams, contentProvider) {
     $scope.contentElement = (function () {
-        for (var i = 0; i < contentProvider.contentElements.length; i++) {
+        for (var i = 0; i < contentProvider.contentElements.length; i++)
             if (contentProvider.contentElements[i].Id == $routeParams.contentId)
                 return contentProvider.contentElements[i];
-        }
+
+        contentProvider.getcontentElement($routeParams.contentId, function (contentElement) {
+            $scope.contentElement = contentElement;
+        });
     })();
 }
 
