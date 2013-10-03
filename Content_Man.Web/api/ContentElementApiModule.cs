@@ -14,8 +14,8 @@ namespace Content_Man.Web.api
         {
             Get["/"] = _ =>
             {
-                var list = new List<ContentElement<TextContent>>();
-                var ce = new ContentElement<TextContent>(0, Language.Invariant);
+                var list = new List<ContentElement>();
+                var ce = new ContentElement(0, Language.Invariant);
                 var textContent = new TextContent(Language.Invariant);
                 textContent.SetValue("text invariant");
                 ce.SetValue(textContent);
@@ -26,7 +26,7 @@ namespace Content_Man.Web.api
 
                 list.Add(ce);
 
-                ce = new ContentElement<TextContent>(1, Language.Invariant);
+                ce = new ContentElement(1, Language.Invariant);
                 textContent = new TextContent(Language.Invariant);
                 textContent.SetValue("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum");
                 ce.SetValue(textContent);
@@ -48,8 +48,8 @@ namespace Content_Man.Web.api
 
             Get["/{elementId}"] = arg =>
             {
-                var list = new List<ContentElement<TextContent>>();
-                var ce = new ContentElement<TextContent>(arg.elementId, Language.Invariant);
+                var list = new List<ContentElement>();
+                var ce = new ContentElement(arg.elementId, Language.Invariant);
                 var textContent = new TextContent(Language.Invariant);
                 textContent.SetValue("text invariant");
                 ce.SetValue(textContent);
@@ -83,7 +83,7 @@ namespace Content_Man.Web.api
 
     internal static class ContentElementExtension
     {
-        public static byte[] ToJson<T>(this IEnumerable<ContentElement<T>> elements) where T : class, IContentValue
+        public static byte[] ToJson(this IEnumerable<ContentElement> elements)
         {
             var jsonModel = elements.Select(ce =>
                 new

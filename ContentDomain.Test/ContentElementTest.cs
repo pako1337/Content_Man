@@ -68,9 +68,9 @@ namespace ContentDomain.Test
             Assert.Throws<ArgumentException>(() => CreateDefaultContentElement().GetValue(Language.Invariant));
         }
 
-        private ContentElement<ValueStub> CreateDefaultContentElement()
+        private ContentElement CreateDefaultContentElement()
         {
-            return new ContentElement<ValueStub>(0, Language.Invariant);
+            return new ContentElement(0, Language.Invariant);
         }
         
         private class ValueStub : IContentValue

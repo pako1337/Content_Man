@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContentDomain
 {
-    public sealed class ContentElement<T>
-        where T : class, IContentValue
+    public sealed class ContentElement
     {
         private Dictionary<Language, IContentValue> _values = new Dictionary<Language, IContentValue>();
 
