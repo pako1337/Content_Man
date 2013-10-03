@@ -9,7 +9,7 @@ namespace ContentDomain
     public sealed class ContentElement<T>
         where T : class, IContentValue
     {
-        private Dictionary<Language, T> _values = new Dictionary<Language,T>();
+        private Dictionary<Language, IContentValue> _values = new Dictionary<Language, IContentValue>();
 
         public int Id { get; private set; }
 
@@ -21,7 +21,7 @@ namespace ContentDomain
             DefaultLanguage = defaultLanguage;
         }
 
-        public void SetValue(T value)
+        public void SetValue(IContentValue value)
         {
             if (value == null)
                 throw new ArgumentNullException("value");
@@ -31,7 +31,7 @@ namespace ContentDomain
             _values[value.Language] = value;
         }
 
-        public T GetValue(Language language)
+        public IContentValue GetValue(Language language)
         {
             if (!_values.ContainsKey(language))
                 throw new ArgumentException(
