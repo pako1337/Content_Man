@@ -12,11 +12,14 @@ namespace ContentDomain
 
         public int Id { get; private set; }
 
+        public ContentType ContentType { get; private set; }
+
         public Language DefaultLanguage { get; private set; }
 
-        public ContentElement(int id, Language defaultLanguage)
+        public ContentElement(int id, Language defaultLanguage, ContentType contentType)
         {
             Id = id;
+            ContentType = contentType;
             DefaultLanguage = defaultLanguage;
         }
 
@@ -26,6 +29,8 @@ namespace ContentDomain
                 throw new ArgumentNullException("value");
             if (_values.Count == 0 && value.Language != DefaultLanguage)
                 throw new ArgumentException("First added value must be of default language", "value");
+            if (value.ContentType != ContentType)
+                throw new ArgumentException("Value has different type than ContentElement", "value");
 
             _values[value.Language] = value;
         }

@@ -10,6 +10,8 @@ namespace ContentDomain
     {
         public int Id { get; private set; }
 
+        public ContentType ContentType { get { return ContentDomain.ContentType.Text; } }
+
         public ContentStatus Status { get; private set; }
 
         public string Value { get; private set; }

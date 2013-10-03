@@ -68,15 +68,33 @@ namespace ContentDomain.Test
             Assert.Throws<ArgumentException>(() => CreateDefaultContentElement().GetValue(Language.Invariant));
         }
 
+        [Fact]
+        public void should_have_content_type_defined()
+        {
+            (new ContentElement(0, Language.Invariant, ContentType.List)).ContentType.Should().Be(ContentType.List);
+        }
+
+        [Fact]
+        public void should_throw_argument_exception_when_value_is_of_invalid_type()
+        {
+            var contentElement = CreateDefaultContentElement();
+            var content = ValueStub
+                .Create()
+                .WithLanguage(Language.Invariant)
+                .WithContentType(ContentType.List);
+            Assert.Throws<ArgumentException>(() => contentElement.SetValue(content));
+        }
+
         private ContentElement CreateDefaultContentElement()
         {
-            return new ContentElement(0, Language.Invariant);
+            return new ContentElement(0, Language.Invariant, ContentType.Text);
         }
         
         private class ValueStub : IContentValue
         {
             private Language _language = null;
             public int Id { get; private set; }
+            public ContentType ContentType { get; private set; }
             public ContentStatus Status { get { return ContentStatus.Draft; } }
             public Language Language { get { return _language; } }
             public void MarkComplete() { }
@@ -89,6 +107,12 @@ namespace ContentDomain.Test
             public ValueStub WithLanguage(Language language)
             {
                 _language = language;
+                return this;
+            }
+
+            public ValueStub WithContentType(ContentType contentType)
+            {
+                ContentType = contentType;
                 return this;
             }
         }
