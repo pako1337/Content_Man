@@ -18,13 +18,13 @@ namespace ContentDomain.Test
         public void should_throw_when_adding_null_value()
         {
             Assert.Throws<ArgumentNullException>(
-                () => CreateDefaultContentElement().SetValue(null));
+                () => CreateDefaultContentElement().AddValue(null));
         }
 
         [Fact]
         public void should_accept_value_when_not_null()
         {
-            CreateDefaultContentElement().SetValue(ValueStub.Create().WithLanguage(Language.Invariant));
+            CreateDefaultContentElement().AddValue(ValueStub.Create().WithLanguage(Language.Invariant));
         }
 
         [Fact]
@@ -32,8 +32,8 @@ namespace ContentDomain.Test
         {
             var newValue = ValueStub.Create().WithLanguage(Language.Invariant);
             var contentElement = CreateDefaultContentElement();
-            contentElement.SetValue(ValueStub.Create().WithLanguage(Language.Invariant));
-            contentElement.SetValue(newValue);
+            contentElement.AddValue(ValueStub.Create().WithLanguage(Language.Invariant));
+            contentElement.AddValue(newValue);
             contentElement.GetValue(Language.Invariant).Should().Be(newValue);
         }
 
@@ -48,7 +48,7 @@ namespace ContentDomain.Test
         {
             var contentElement = CreateDefaultContentElement();
             var content = ValueStub.Create().WithLanguage(new Language("en"));
-            Assert.Throws<ArgumentException>(() => contentElement.SetValue(content));
+            Assert.Throws<ArgumentException>(() => contentElement.AddValue(content));
         }
 
         [Fact]
@@ -57,8 +57,8 @@ namespace ContentDomain.Test
             var contentElement = CreateDefaultContentElement();
             var content1 = ValueStub.Create().WithLanguage(Language.Invariant);
             var content2 = ValueStub.Create().WithLanguage(Language.Create("en"));
-            contentElement.SetValue(content1);
-            contentElement.SetValue(content2);
+            contentElement.AddValue(content1);
+            contentElement.AddValue(content2);
             contentElement.GetValues().Count().Should().Be(2);
         }
 
@@ -82,7 +82,7 @@ namespace ContentDomain.Test
                 .Create()
                 .WithLanguage(Language.Invariant)
                 .WithContentType(ContentType.List);
-            Assert.Throws<ArgumentException>(() => contentElement.SetValue(content));
+            Assert.Throws<ArgumentException>(() => contentElement.AddValue(content));
         }
 
         private ContentElement CreateDefaultContentElement()

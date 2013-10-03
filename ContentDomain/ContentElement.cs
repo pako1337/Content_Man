@@ -23,7 +23,7 @@ namespace ContentDomain
             DefaultLanguage = defaultLanguage;
         }
 
-        public void SetValue(IContentValue value)
+        public void AddValue(IContentValue value)
         {
             if (value == null)
                 throw new ArgumentNullException("value");
