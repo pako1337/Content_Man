@@ -11,9 +11,7 @@ namespace ContentDomain.Repositories
     {
         public ContentElementRepository()
         {
-            var e = Database.Opener
-                .OpenConnection("host=localhost;port=5432;database=simple_test;user id=postgres;password=admin;pooling=false", "Npgsql")
-                .ContentElement.All();
+            var e = Database.Open().ContentElement.FindByContentElementId(1);
         }
     }
 }

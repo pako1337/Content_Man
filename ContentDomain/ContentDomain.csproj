@@ -32,27 +32,23 @@
   <ItemGroup>
     <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Npgsql.2.0.12.1\lib\net40\Mono.Security.dll</HintPath>
+      <HintPath>..\packages\Simple.Data.PostgreSql\Mono.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Npgsql.2.0.12.1\lib\net40\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql">
+      <HintPath>..\packages\Simple.Data.PostgreSql\Npgsql.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="policy.2.0.Npgsql, Version=0.0.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Npgsql.2.0.12.1\lib\net40\policy.2.0.Npgsql.dll</HintPath>
+    <Reference Include="Simple.Data">
+      <HintPath>..\packages\Simple.Data.PostgreSql\Simple.Data.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Simple.Data, Version=0.12.2.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Simple.Data.Core.0.12.2.2\lib\net40\Simple.Data.dll</HintPath>
+    <Reference Include="Simple.Data.Ado">
+      <HintPath>..\packages\Simple.Data.PostgreSql\Simple.Data.Ado.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Simple.Data.Ado, Version=0.12.2.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Simple.Data.Ado.0.12.2.2\lib\net40\Simple.Data.Ado.dll</HintPath>
-    </Reference>
-    <Reference Include="Simple.Data.PostgreSql, Version=0.16.2.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Simple.Data.PostgreSql.0.16.2.2\lib\net40\Simple.Data.PostgreSql.dll</HintPath>
+    <Reference Include="Simple.Data.PostgreSql">
+      <HintPath>..\packages\Simple.Data.PostgreSql\Simple.Data.PostgreSql.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -73,7 +69,7 @@
     <Compile Include="TextContent.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
