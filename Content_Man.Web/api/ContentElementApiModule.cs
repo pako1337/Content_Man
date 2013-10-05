@@ -63,7 +63,7 @@ namespace Content_Man.Web.api
                 var jsonModel = 
                     new
                     {
-                        Id = ce.Id,
+                        Id = ce.ContentElementId,
                         DefaultLanguage = ce.DefaultLanguage,
                         Values = ce.GetValues()
                     };
@@ -88,7 +88,7 @@ namespace Content_Man.Web.api
             var jsonModel = elements.Select(ce =>
                 new
                 {
-                    Id = ce.Id,
+                    Id = ce.ContentElementId,
                     DefaultLanguage = ce.DefaultLanguage,
                     Values = ce.GetValues()
                 });

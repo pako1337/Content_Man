@@ -8,7 +8,7 @@ namespace ContentDomain
 {
     public class TextContent : IContentValue
     {
-        public int Id { get; private set; }
+        public int ContentValueId { get; private set; }
 
         public ContentType ContentType { get { return ContentDomain.ContentType.Text; } }
 

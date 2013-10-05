@@ -93,7 +93,7 @@ namespace ContentDomain.Test
         private class ValueStub : IContentValue
         {
             private Language _language = null;
-            public int Id { get; private set; }
+            public int ContentValueId { get; private set; }
             public ContentType ContentType { get; private set; }
             public ContentStatus Status { get { return ContentStatus.Draft; } }
             public Language Language { get { return _language; } }

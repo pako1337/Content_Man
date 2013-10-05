@@ -12,6 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E6FD15
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Content_Man.Web", "Content_Man.Web\Content_Man.Web.csproj", "{02DD3A3A-CA13-42D9-96A4-9EC748849804}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{BACD34B6-1875-4D54-AB01-CB9A6B18B651}"
+	ProjectSection(SolutionItems) = preProject
+		Database\CreateDatabase.sql = Database\CreateDatabase.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

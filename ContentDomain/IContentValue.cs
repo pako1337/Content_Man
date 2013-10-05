@@ -8,7 +8,7 @@ namespace ContentDomain
 {
     public interface IContentValue
     {
-        int Id { get; }
+        int ContentValueId { get; }
         ContentType ContentType { get; }
         ContentStatus Status { get; }
         Language Language { get; }
