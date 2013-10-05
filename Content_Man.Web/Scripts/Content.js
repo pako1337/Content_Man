@@ -20,7 +20,7 @@ ContentModule.factory('contentProvider', function ($http) {
                     })
                 })
                 .error(function (data, status, headers, config) {
-                    alert("Oh my! We have a sittuation here!");
+                    //alert("Oh my! We have a sittuation here!");
                 });
         },
 
@@ -32,7 +32,7 @@ ContentModule.factory('contentProvider', function ($http) {
                     elementReady(ce);
                 })
                 .error(function (data, status, headers, config) {
-                    alert("Oh my!");
+                    //alert("Oh my!");
                 });
         }
     };
