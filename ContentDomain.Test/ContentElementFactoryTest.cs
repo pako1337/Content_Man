@@ -47,12 +47,34 @@ namespace ContentDomain.Test
             dynamicElement.ContentElementId = 1;
             dynamicElement.ContentType = (int)ContentType.List;
             dynamicElement.DefaultLanguage = "en";
+            dynamicElement.TextContents = new object[0];
 
             ContentElement contentElement = factory.Create(dynamicElement);
 
             contentElement.ContentElementId.Should().Be(1);
             contentElement.ContentType.Should().Be(ContentType.List);
             contentElement.DefaultLanguage.Should().Be(Language.Create("en"));
+        }
+
+        [Fact]
+        public void should_populate_ContentElement_with_text_values()
+        {
+            dynamic value1 = new System.Dynamic.ExpandoObject();
+            value1.TextContentId = 1;
+            value1.ContentStatus = (int)ContentStatus.Draft;
+            value1.Language = "en";
+            value1.Value = "english";
+            
+            dynamic dynamicElement = new System.Dynamic.ExpandoObject();
+            dynamicElement.ContentElementId = 1;
+            dynamicElement.ContentType = (int)ContentType.Text;
+            dynamicElement.DefaultLanguage = "en";
+            dynamicElement.TextContents = new[] { value1 };
+
+            ContentElement contentElement = factory.Create(dynamicElement);
+            var values = contentElement.GetValues();
+
+            values.Count().Should().Be(1);
         }
     }
 }

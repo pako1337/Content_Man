@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ContentDomain.Factories;
 using Simple.Data;
 
 namespace ContentDomain.Repositories
@@ -12,10 +13,15 @@ namespace ContentDomain.Repositories
         public ContentElementRepository()
         {
             var db = Database.Open();
-            List<ContentElement> e = db.ContentElements.All().WithLanguages();
+            dynamic e = db.ContentElements.All().WithTextContents();
 
-            var c = db.ContentElements.All().WithLanguages();
-            var d = c.First().Languages;
+            var elements = new List<ContentElement>();
+            var factory = new ContentElementFactory();
+            foreach (var element in e)
+            {
+                elements.Add(factory.Create(element));
+                var l = element.TextContents;
+            }
         }
     }
 }

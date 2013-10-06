@@ -102,7 +102,7 @@ namespace ContentDomain.Test
 
             public static ValueStub Create()
             {
-                return new ValueStub();
+                return new ValueStub() { ContentType = ContentType.Text };
             }
 
             public ValueStub WithLanguage(Language language)
