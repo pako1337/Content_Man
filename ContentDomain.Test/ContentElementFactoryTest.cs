@@ -19,6 +19,13 @@ namespace ContentDomain.Test
         }
 
         [Fact]
+        public void should_have_id_set_to_minus_1()
+        {
+            var factory = new ContentElementFactory();
+            factory.Create(Language.InvariantCode, ContentType.Text).ContentElementId.Should().Be(-1);
+        }
+
+        [Fact]
         public void should_have_type_set_correctly()
         {
             var factory = new ContentElementFactory();

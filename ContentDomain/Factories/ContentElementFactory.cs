@@ -8,14 +8,9 @@ namespace ContentDomain.Factories
 {
     public class ContentElementFactory
     {
-        public ContentElementFactory()
-        {
-
-        }
-
         public ContentElement Create(string language, ContentType type)
         {
-            return new ContentElement(1, Language.Create(language), type);
+            return new ContentElement(-1, Language.Create(language), type);
         }
     }
 }
