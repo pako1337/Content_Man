@@ -11,7 +11,8 @@ namespace ContentDomain.Repositories
     {
         public ContentElementRepository()
         {
-            List<ContentElement> e = Database.Open().ContentElements.All().WithLanguages();
+            var db = Database.Open();
+            List<ContentElement> e = db.ContentElements.All().WithLanguages();
         }
     }
 }

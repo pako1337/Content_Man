@@ -14,6 +14,7 @@ namespace Content_Man.Web.api
         {
             Get["/"] = _ =>
             {
+                new ContentDomain.Repositories.ContentElementRepository();
                 var list = new List<ContentElement>();
                 var ce = new ContentElement(0, Language.Invariant, ContentType.Text);
                 var textContent = new TextContent(Language.Invariant);
@@ -64,7 +65,7 @@ namespace Content_Man.Web.api
                     new
                     {
                         Id = ce.ContentElementId,
-                        DefaultLanguage = ce.DefaultLanguage,
+                        DefaultLanguage = ce.Languages,
                         Values = ce.GetValues()
                     };
 
@@ -89,7 +90,7 @@ namespace Content_Man.Web.api
                 new
                 {
                     Id = ce.ContentElementId,
-                    DefaultLanguage = ce.DefaultLanguage,
+                    DefaultLanguage = ce.Languages,
                     Values = ce.GetValues()
                 });
 

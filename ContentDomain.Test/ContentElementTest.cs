@@ -40,7 +40,7 @@ namespace ContentDomain.Test
         [Fact]
         public void should_have_default_language()
         {
-            CreateDefaultContentElement().DefaultLanguage.Should().NotBeNull();
+            CreateDefaultContentElement().Languages.Should().NotBeNull();
         }
 
         [Fact]
