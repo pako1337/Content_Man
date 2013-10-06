@@ -26,14 +26,14 @@ CREATE TABLE "ContentElements"
 
 CREATE TABLE "TextContents"
 (
-	"ContentValueId" serial NOT NULL,
+	"TextContentId" serial NOT NULL,
 	"ContentElementId" integer NOT NULL,
 	"ContentStatus" integer NOT NULL,
 	"Language" varchar(10) NOT NULL,
 	"Value" text,
 
 	CONSTRAINT "PK_TextContents"
-		PRIMARY KEY ("ContentValueId"),
+		PRIMARY KEY ("TextContentId"),
 	CONSTRAINT "FK_TextContents_ContentElements"
 		FOREIGN KEY ("ContentElementId")
 		REFERENCES "ContentElements"("ContentElementId"),
