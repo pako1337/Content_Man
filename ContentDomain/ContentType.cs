@@ -8,7 +8,7 @@ namespace ContentDomain
 {
     public enum ContentType
     {
-        Text,
+        Text = 1,
         List,
         Graphic
     }
