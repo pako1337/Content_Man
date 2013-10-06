@@ -39,5 +39,20 @@ namespace ContentDomain.Test
         {
             factory.Create(languageCode, ContentType.List).DefaultLanguage.Should().Be(Language.Create(languageCode));
         }
+
+        [Fact]
+        public void should_create_ContentElement_based_on_dynamic()
+        {
+            dynamic dynamicElement = new System.Dynamic.ExpandoObject();
+            dynamicElement.ContentElementId = 1;
+            dynamicElement.ContentType = (int)ContentType.List;
+            dynamicElement.DefaultLanguage = "en";
+
+            ContentElement contentElement = factory.Create(dynamicElement);
+
+            contentElement.ContentElementId.Should().Be(1);
+            contentElement.ContentType.Should().Be(ContentType.List);
+            contentElement.DefaultLanguage.Should().Be(Language.Create("en"));
+        }
     }
 }

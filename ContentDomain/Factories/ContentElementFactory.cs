@@ -12,5 +12,13 @@ namespace ContentDomain.Factories
         {
             return new ContentElement(-1, Language.Create(language), type);
         }
+
+        public ContentElement Create(dynamic dynamicElement)
+        {
+            return new ContentElement(
+                dynamicElement.ContentElementId,
+                Language.Create(dynamicElement.DefaultLanguage),
+                (ContentType)dynamicElement.ContentType);
+        }
     }
 }
