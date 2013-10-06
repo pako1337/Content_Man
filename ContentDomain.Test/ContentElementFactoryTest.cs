@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ContentDomain.Factories;
 using FluentAssertions;
 using Xunit;
+using Xunit.Extensions;
 
 namespace ContentDomain.Test
 {
@@ -25,16 +26,18 @@ namespace ContentDomain.Test
             factory.Create(Language.InvariantCode, ContentType.Text).ContentElementId.Should().Be(-1);
         }
 
-        [Fact]
-        public void should_have_type_set_correctly()
+        [Theory]
+        [ClassData(typeof(ContentTypeFactory))]
+        public void should_have_type_set_correctly(ContentType type)
         {
-            factory.Create(Language.InvariantCode, ContentType.List).ContentType.Should().Be(ContentType.List);
+            factory.Create(Language.InvariantCode, type).ContentType.Should().Be(type);
         }
 
-        [Fact]
-        public void should_have_language_set_correctly()
+        [Theory]
+        [ClassData(typeof(LanguageIsoCodeFactory))]
+        public void should_have_language_set_correctly(string languageCode)
         {
-            factory.Create("en", ContentType.List).DefaultLanguage.Should().Be(Language.Create("en"));
+            factory.Create(languageCode, ContentType.List).DefaultLanguage.Should().Be(Language.Create(languageCode));
         }
     }
 }
