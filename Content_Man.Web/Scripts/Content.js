@@ -69,15 +69,15 @@ function ContentElement(id, language, values) {
         return languages;
     })(this.Values);
 
-    this.changeLanguage = function (isoCode) {
-        this.SelectedValue = findValueWithLanguage(this.Values, isoCode);
+    this.changeLanguage = function (languageId) {
+        this.SelectedValue = findValueWithLanguage(this.Values, languageId);
     };
 
-    this.changeLanguage(language.IsoCode);
+    this.changeLanguage(language.LanguageId);
 
-    function findValueWithLanguage(values, isoCode) {
+    function findValueWithLanguage(values, languageId) {
         for (var i = 0; i < values.length; i++)
-            if (values[i].Language.IsoCode === isoCode)
+            if (values[i].Language.LanguageId === languageId)
                 return values[i];
     }
 }

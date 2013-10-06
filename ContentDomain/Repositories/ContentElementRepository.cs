@@ -10,7 +10,7 @@ namespace ContentDomain.Repositories
 {
     public class ContentElementRepository
     {
-        public ContentElementRepository()
+        public IEnumerable<ContentElement> All()
         {
             var db = Database.Open();
             dynamic e = db.ContentElements.All().WithTextContents();
@@ -19,9 +19,12 @@ namespace ContentDomain.Repositories
             var factory = new ContentElementFactory();
             foreach (var element in e)
             {
+                if (element.TextContents == null)
+                    element.TextContents = new object[0];
                 elements.Add(factory.Create(element));
-                var l = element.TextContents;
             }
+
+            return elements;
         }
     }
 }
