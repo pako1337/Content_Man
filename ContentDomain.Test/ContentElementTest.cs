@@ -68,10 +68,11 @@ namespace ContentDomain.Test
             Assert.Throws<ArgumentException>(() => CreateDefaultContentElement().GetValue(Language.Invariant));
         }
 
-        [Fact]
-        public void should_have_content_type_defined()
+        [Theory]
+        [ClassData(typeof(ContentTypeFactory))]
+        public void should_have_content_type_defined(ContentType type)
         {
-            (new ContentElement(0, Language.Invariant, ContentType.List)).ContentType.Should().Be(ContentType.List);
+            (new ContentElement(0, Language.Invariant, type)).ContentType.Should().Be(type);
         }
 
         [Fact]
