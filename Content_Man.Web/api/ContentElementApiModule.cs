@@ -65,7 +65,7 @@ namespace Content_Man.Web.api
                     new
                     {
                         Id = ce.ContentElementId,
-                        DefaultLanguage = ce.Languages,
+                        DefaultLanguage = ce.DefaultLanguage,
                         Values = ce.GetValues()
                     };
 
@@ -90,7 +90,7 @@ namespace Content_Man.Web.api
                 new
                 {
                     Id = ce.ContentElementId,
-                    DefaultLanguage = ce.Languages,
+                    DefaultLanguage = ce.DefaultLanguage,
                     Values = ce.GetValues()
                 });
 

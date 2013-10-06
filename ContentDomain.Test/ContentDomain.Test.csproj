@@ -57,6 +57,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="ContentElementFactoryTest.cs" />
     <Compile Include="ContentElementTest.cs" />
     <Compile Include="LanguageIsoCodeFactory.cs" />
     <Compile Include="LanguageTest.cs" />

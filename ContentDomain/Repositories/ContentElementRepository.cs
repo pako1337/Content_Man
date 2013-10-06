@@ -13,6 +13,9 @@ namespace ContentDomain.Repositories
         {
             var db = Database.Open();
             List<ContentElement> e = db.ContentElements.All().WithLanguages();
+
+            var c = db.ContentElements.All().WithLanguages();
+            var d = c.First().Languages;
         }
     }
 }
