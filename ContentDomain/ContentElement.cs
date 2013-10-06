@@ -16,6 +16,10 @@ namespace ContentDomain
 
         public Language DefaultLanguage { get; private set; }
 
+        public Language Languages { get; private set; }
+
+        public ContentElement() { }
+
         public ContentElement(int id, Language defaultLanguage, ContentType contentType)
         {
             ContentElementId = id;
