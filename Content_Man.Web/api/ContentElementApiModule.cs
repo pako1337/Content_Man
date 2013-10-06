@@ -14,29 +14,7 @@ namespace Content_Man.Web.api
         {
             Get["/"] = _ =>
             {
-                new ContentDomain.Repositories.ContentElementRepository();
-                var list = new List<ContentElement>();
-                var ce = new ContentElement(0, Language.Invariant, ContentType.Text);
-                var textContent = new TextContent(Language.Invariant);
-                textContent.SetValue("text invariant");
-                ce.AddValue(textContent);
-
-                textContent = new TextContent(Language.Create("en-GB"));
-                textContent.SetValue("text in english");
-                ce.AddValue(textContent);
-
-                list.Add(ce);
-
-                ce = new ContentElement(1, Language.Invariant, ContentType.Text);
-                textContent = new TextContent(Language.Invariant);
-                textContent.SetValue("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum");
-                ce.AddValue(textContent);
-
-                textContent = new TextContent(Language.Create("en-GB"));
-                textContent.SetValue("But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful");
-                ce.AddValue(textContent);
-
-                list.Add(ce);
+                var list = new ContentDomain.Repositories.ContentElementRepository().All();
 
                 var bytes = list.ToJson();
 

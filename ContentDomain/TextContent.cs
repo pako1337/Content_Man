@@ -8,15 +8,15 @@ namespace ContentDomain
 {
     public class TextContent : IContentValue
     {
-        public int ContentValueId { get; private set; }
+        public int ContentValueId { get; internal set; }
 
-        public ContentType ContentType { get { return ContentDomain.ContentType.Text; } }
+        public ContentType ContentType { get { return ContentType.Text; } }
 
-        public ContentStatus Status { get; private set; }
+        public ContentStatus Status { get; internal set; }
 
-        public string Value { get; private set; }
+        public string Value { get; internal set; }
 
-        public Language Language { get; private set; }
+        public Language Language { get; internal set; }
 
         public TextContent(Language language)
         {
