@@ -13,9 +13,9 @@ namespace ContentDomain.Factories
 
         }
 
-        public ContentElement Create()
+        public ContentElement Create(string language, ContentType type)
         {
-            return new ContentElement(1, null, ContentType.Text);
+            return new ContentElement(1, Language.Create(language), type);
         }
     }
 }
