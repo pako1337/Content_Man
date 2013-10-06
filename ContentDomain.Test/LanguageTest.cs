@@ -34,7 +34,7 @@ namespace ContentDomain.Test
         public void should_create_language_with_iso_code_filled(string langCode)
         {
             var language1 = Language.Create(langCode);
-            language1.IsoCode.Should().Be(langCode);
+            language1.LanguageId.Should().Be(langCode);
         }
 
         [Fact]
@@ -67,7 +67,7 @@ namespace ContentDomain.Test
         [Fact]
         public void should_return_invariant_language_by_static_property()
         {
-            Language.Invariant.IsoCode.Should().Be(Language.InvariantCode);
+            Language.Invariant.LanguageId.Should().Be(Language.InvariantCode);
         }
     }
 }

@@ -15,13 +15,18 @@ namespace ContentDomain
 
         public static Language Invariant { get { return Language.Create(Language.InvariantCode); } }
 
-        public string IsoCode { get; private set; }
+        public string LanguageId { get; private set; }
         public bool IsRightToLeft { get; private set; }
         public string Name { get; private set; }
 
+        public Language()
+        {
+
+        }
+
         public Language(string isoCode)
         {
-            this.IsoCode = isoCode;
+            this.LanguageId = isoCode;
         }
 
         public override bool Equals(object obj)
@@ -32,12 +37,12 @@ namespace ContentDomain
         public bool Equals(Language other)
         {
             if (other == null) return false;
-            return string.Equals(this.IsoCode, other.IsoCode, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(this.LanguageId, other.LanguageId, StringComparison.OrdinalIgnoreCase);
         }
 
         public override int GetHashCode()
         {
-            return this.IsoCode.ToLower().GetHashCode();
+            return this.LanguageId.ToLower().GetHashCode();
         }
 
         public static Language Create(string isoCode)
