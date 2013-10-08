@@ -20,16 +20,17 @@ namespace ContentDomain.Factories
                 Language.Create(dynamicElement.DefaultLanguage),
                 (ContentType)dynamicElement.ContentType);
 
-            foreach (var value in dynamicElement.TextContents)
-            {
-                TextContent text = new TextContent(Language.Create(value.Language))
+            if (dynamicElement.TextContents != null)
+                foreach (var value in dynamicElement.TextContents)
                 {
-                    ContentValueId = value.TextContentId,
-                    Status = (ContentStatus)value.ContentStatus,
-                    Value = value.Value
-                };
-                contentElement.AddValue(text);
-            }
+                    TextContent text = new TextContent(Language.Create(value.Language))
+                    {
+                        ContentValueId = value.TextContentId,
+                        Status = (ContentStatus)value.ContentStatus,
+                        Value = value.Value
+                    };
+                    contentElement.AddValue(text);
+                }
 
             return contentElement;
         }

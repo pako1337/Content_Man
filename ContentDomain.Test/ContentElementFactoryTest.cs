@@ -76,5 +76,21 @@ namespace ContentDomain.Test
 
             values.Count().Should().Be(1);
         }
+
+        [Fact]
+        public void should_not_throw_when_textContents_are_null()
+        {
+            dynamic dynamicElement = new System.Dynamic.ExpandoObject();
+            dynamicElement.ContentElementId = 1;
+            dynamicElement.ContentType = (int)ContentType.List;
+            dynamicElement.DefaultLanguage = "en";
+            dynamicElement.TextContents = null;
+
+            ContentElement contentElement = factory.Create(dynamicElement);
+
+            contentElement.ContentElementId.Should().Be(1);
+            contentElement.ContentType.Should().Be(ContentType.List);
+            contentElement.DefaultLanguage.Should().Be(Language.Create("en"));
+        }
     }
 }
