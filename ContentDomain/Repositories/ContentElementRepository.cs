@@ -13,18 +13,30 @@ namespace ContentDomain.Repositories
         public IEnumerable<ContentElement> All()
         {
             var db = Database.Open();
-            dynamic e = db.ContentElements.All().WithTextContents();
+            List<ContentElementDb> e = db.ContentElements.All().WithTextContents();
 
             var elements = new List<ContentElement>();
             var factory = new ContentElementFactory();
             foreach (var element in e)
-            {
-                if (element.TextContents == null)
-                    element.TextContents = new object[0];
                 elements.Add(factory.Create(element));
-            }
 
             return elements;
         }
+    }
+
+    internal class ContentElementDb
+    {
+        public int ContentElementId { get; set; }
+        public ContentType ContentType { get; set; }
+        public string DefaultLanguage { get; set; }
+        public List<TextContentDb> TextContents { get; set; }
+    }
+
+    internal class TextContentDb
+    {
+        public int TextContentId { get; set; }
+        public int ContentStatus { get; set; }
+        public string Value { get; set; }
+        public string Language { get; set; }
     }
 }
