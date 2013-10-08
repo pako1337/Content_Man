@@ -2,7 +2,7 @@
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', { controller: ContentList, templateUrl: 'ContentList.html' })
-            .when('/edit/:contentId', { controller: ContentEdit, templateUrl: 'ContentEdit.html' })
+            .when('/edit/:contentId/:lang', { controller: ContentEdit, templateUrl: 'ContentEdit.html' })
             .otherwise({ redirectTo: '/' });
     });
 
@@ -53,6 +53,8 @@ function ContentEdit($scope, $routeParams, contentProvider) {
 
         contentProvider.getcontentElement($routeParams.contentId, function (contentElement) {
             $scope.contentElement = contentElement;
+            if ($routeParams.lang)
+                contentElement.changeLanguage($routeParams.lang);
         });
     })();
 }
