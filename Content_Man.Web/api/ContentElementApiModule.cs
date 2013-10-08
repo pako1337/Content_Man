@@ -27,17 +27,7 @@ namespace Content_Man.Web.api
 
             Get["/{elementId}"] = arg =>
             {
-                var list = new List<ContentElement>();
-                var ce = new ContentElement(arg.elementId, Language.Invariant, ContentType.Text);
-                var textContent = new TextContent(Language.Invariant);
-                textContent.SetValue("text invariant");
-                ce.AddValue(textContent);
-
-                textContent = new TextContent(Language.Create("en-GB"));
-                textContent.SetValue("text in english");
-                ce.AddValue(textContent);
-
-                list.Add(ce);
+                var ce = new ContentDomain.Repositories.ContentElementRepository().Get(arg.elementId);
 
                 var jsonModel = 
                     new

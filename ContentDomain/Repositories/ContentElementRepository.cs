@@ -10,17 +10,27 @@ namespace ContentDomain.Repositories
 {
     public class ContentElementRepository
     {
+        ContentElementFactory factory = new ContentElementFactory();
+
         public IEnumerable<ContentElement> All()
         {
             var db = Database.Open();
-            List<ContentElementDb> e = db.ContentElements.All().WithTextContents();
+            List<ContentElementDb> dbElements = db.ContentElements.All().WithTextContents();
 
             var elements = new List<ContentElement>();
-            var factory = new ContentElementFactory();
-            foreach (var element in e)
+            foreach (var element in dbElements)
                 elements.Add(factory.Create(element));
 
             return elements;
+        }
+
+        public ContentElement Get(int contentElementId)
+        {
+            var db = Database.Open();
+            List<ContentElementDb> elements = db.ContentElements
+                .FindAllByContentElementId(contentElementId)
+                .WithTextContents();
+            return factory.Create(elements.FirstOrDefault());
         }
     }
 
