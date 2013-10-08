@@ -43,11 +43,7 @@ namespace ContentDomain.Test
         [Fact]
         public void should_create_ContentElement_based_on_dynamic()
         {
-            dynamic dynamicElement = new System.Dynamic.ExpandoObject();
-            dynamicElement.ContentElementId = 1;
-            dynamicElement.ContentType = (int)ContentType.List;
-            dynamicElement.DefaultLanguage = "en";
-            dynamicElement.TextContents = new object[0];
+            dynamic dynamicElement = GetSampleDynamicContentElement(ContentType.List);
 
             ContentElement contentElement = factory.Create(dynamicElement);
 
@@ -64,11 +60,8 @@ namespace ContentDomain.Test
             value1.ContentStatus = (int)ContentStatus.Draft;
             value1.Language = "en";
             value1.Value = "english";
-            
-            dynamic dynamicElement = new System.Dynamic.ExpandoObject();
-            dynamicElement.ContentElementId = 1;
-            dynamicElement.ContentType = (int)ContentType.Text;
-            dynamicElement.DefaultLanguage = "en";
+
+            dynamic dynamicElement = GetSampleDynamicContentElement();
             dynamicElement.TextContents = new[] { value1 };
 
             ContentElement contentElement = factory.Create(dynamicElement);
@@ -80,17 +73,17 @@ namespace ContentDomain.Test
         [Fact]
         public void should_not_throw_when_textContents_are_null()
         {
+            ContentElement contentElement = factory.Create(GetSampleDynamicContentElement());
+        }
+
+        private dynamic GetSampleDynamicContentElement(ContentType type = ContentType.Text)
+        {
             dynamic dynamicElement = new System.Dynamic.ExpandoObject();
             dynamicElement.ContentElementId = 1;
-            dynamicElement.ContentType = (int)ContentType.List;
+            dynamicElement.ContentType = (int)type;
             dynamicElement.DefaultLanguage = "en";
             dynamicElement.TextContents = null;
-
-            ContentElement contentElement = factory.Create(dynamicElement);
-
-            contentElement.ContentElementId.Should().Be(1);
-            contentElement.ContentType.Should().Be(ContentType.List);
-            contentElement.DefaultLanguage.Should().Be(Language.Create("en"));
+            return dynamicElement;
         }
     }
 }
