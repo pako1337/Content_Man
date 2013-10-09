@@ -21,7 +21,7 @@ ContentModule.factory('contentProvider', function ($http) {
                     })
                 })
                 .error(function (data, status, headers, config) {
-                    //alert("Oh my! We have a sittuation here!");
+                    console.log("Failed to get ContentElements");
                 });
         },
 
@@ -33,7 +33,7 @@ ContentModule.factory('contentProvider', function ($http) {
                     elementReady(ce);
                 })
                 .error(function (data, status, headers, config) {
-                    //alert("Oh my!");
+                    console.log("Failed to get ContentElement: " + elementId);
                 });
         }
     };
