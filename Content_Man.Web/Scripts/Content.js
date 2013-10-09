@@ -47,17 +47,24 @@ function ContentList($scope, contentProvider) {
 }
 
 function ContentEdit($scope, $routeParams, contentProvider) {
-    $scope.contentElement = (function () {
+    $scope.contentElement = undefined;
+
+    (function () {
         for (var i = 0; i < contentProvider.contentElements.length; i++)
-            if (contentProvider.contentElements[i].Id == $routeParams.contentId)
-                return contentProvider.contentElements[i];
+            if (contentProvider.contentElements[i].Id == $routeParams.contentId) {
+                setContentElement(contentProvider.contentElements[i], $routeParams.lang);
+                return;
+            }
 
         contentProvider.getcontentElement($routeParams.contentId, function (contentElement) {
-            $scope.contentElement = contentElement;
-            if ($routeParams.lang)
-                contentElement.changeLanguage($routeParams.lang);
+            setContentElement(contentElement, $routeParams.lang);
         });
     })();
+
+    function setContentElement(ce, lang) {
+        if (lang) ce.changeLanguage(lang);
+        $scope.contentElement = ce;
+    }
 }
 
 function ContentElement(id, language, values) {
