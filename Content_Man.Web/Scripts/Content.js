@@ -2,6 +2,7 @@
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', { controller: ContentList, templateUrl: 'ContentList.html' })
+            .when('/edit/:contentId/', { controller: ContentEdit, templateUrl: 'ContentEdit.html' })
             .when('/edit/:contentId/:lang', { controller: ContentEdit, templateUrl: 'ContentEdit.html' })
             .otherwise({ redirectTo: '/' });
     });
