@@ -34,21 +34,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Simple.Data.PostgreSql\Mono.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql">
+    <Reference Include="Npgsql, Version=2.0.11.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Simple.Data.PostgreSql\Npgsql.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Simple.Data">
+    <Reference Include="Simple.Data, Version=0.18.3.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Simple.Data.PostgreSql\Simple.Data.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Simple.Data.Ado">
+    <Reference Include="Simple.Data.Ado, Version=0.18.3.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Simple.Data.PostgreSql\Simple.Data.Ado.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Simple.Data.PostgreSql">
+    <Reference Include="Simple.Data.PostgreSql, Version=0.16.2.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Simple.Data.PostgreSql\Simple.Data.PostgreSql.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

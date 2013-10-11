@@ -41,10 +41,9 @@ namespace ContentDomain.Repositories
             {
                 var ce = tx.ContentElements.Insert(contentElementDb);
                 foreach (var textContent in contentElementDb.TextContents)
-                {
                     textContent.ContentElementId = ce.ContentElementId;
-                    tx.TextContents.Insert(textContent);
-                }
+
+                tx.TextContents.Insert(contentElementDb.TextContents);
 
                 tx.Commit();
             }

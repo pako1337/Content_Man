@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ContentDomain;
+using ContentDomain.Repositories;
 using Nancy;
 
 namespace Content_Man.Web.api
@@ -14,7 +15,7 @@ namespace Content_Man.Web.api
         {
             Get["/"] = _ =>
             {
-                var list = new ContentDomain.Repositories.ContentElementRepository().All();
+                var list = new ContentElementRepository().All();
 
                 var bytes = list.ToJson();
 
@@ -27,7 +28,7 @@ namespace Content_Man.Web.api
 
             Get["/{elementId}"] = arg =>
             {
-                var ce = new ContentDomain.Repositories.ContentElementRepository().Get(arg.elementId);
+                var ce = new ContentElementRepository().Get(arg.elementId);
 
                 var jsonModel = 
                     new
@@ -46,6 +47,15 @@ namespace Content_Man.Web.api
                     ContentType = "application/json",
                     Contents = s => s.Write(bytes, 0, bytes.Length)
                 };
+            };
+
+            Get["/post"] = _ =>
+            {
+                var repo = new ContentElementRepository();
+                var ce = repo.Get(1);
+                repo.Insert(ce);
+
+                return HttpStatusCode.OK;
             };
         }
     }
