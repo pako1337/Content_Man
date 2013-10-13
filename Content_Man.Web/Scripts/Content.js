@@ -52,7 +52,7 @@ function ContentEdit($scope, $routeParams, contentProvider) {
 
     (function () {
         for (var i = 0; i < contentProvider.contentElements.length; i++)
-            if (contentProvider.contentElements[i].Id == $routeParams.contentId) {
+            if (contentProvider.contentElements[i].ContentElementId == $routeParams.contentId) {
                 setContentElement(contentProvider.contentElements[i], $routeParams.lang);
                 return;
             }
@@ -68,7 +68,7 @@ function ContentEdit($scope, $routeParams, contentProvider) {
     }
 }
 
-function ContentAdd($scope, $routeParams) {
+function ContentAdd($scope, $routeParams, $http) {
     var value = {
         Language: {
             LanguageId: $routeParams.lang
@@ -79,13 +79,16 @@ function ContentAdd($scope, $routeParams) {
     $scope.save = function () {
         console.log("save");
         console.log($scope.contentElement);
+
+        $http.post('api/ContentElement/', $scope.contentElement);
     };
 }
 
 function ContentElement(id, language, values) {
-    this.Id = id;
+    this.ContentElementId = id;
     this.Values = values;
     this.SelectedValue;
+    this.DefaultLanguage = language;
     this.Languages = (function (values) {
         var languages = [];
         for (var i = 0; i < values.length; i++)
