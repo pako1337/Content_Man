@@ -17,7 +17,7 @@ ContentModule.factory('contentProvider', function ($http) {
                 .success(function (data, status, headers, config) {
                     that.contentElements.length = 0;
                     data.forEach(function (element) {
-                        var ce = new ContentElement(element.ContentElementId, element.DefaultLanguage, element.TextContents);
+                        var ce = new ContentElement(element);
                         that.contentElements.push(ce);
                     })
                 })
@@ -30,7 +30,7 @@ ContentModule.factory('contentProvider', function ($http) {
             var that = this;
             $http.get('api/ContentElement/' + elementId)
                 .success(function (data, status, headers, config) {
-                    var ce = new ContentElement(data.Id, data.DefaultLanguage, data.TextContents);
+                    var ce = new ContentElement(data);
                     elementReady(ce);
                 })
                 .error(function (data, status, headers, config) {
@@ -69,8 +69,11 @@ function ContentEdit($scope, $routeParams, contentProvider) {
 }
 
 function ContentAdd($scope, $routeParams, $http) {
-    var value = { Language: $routeParams.lang };
-    $scope.contentElement = new ContentElement(-1, $routeParams.lang, [value]);
+    $scope.contentElement = new ContentElement({
+        ContentElementId: -1,
+        DefaultLanguage: $routeParams.lang,
+        TextContents: [{ Language: $routeParams.lang }]
+    });
 
     $scope.save = function () {
         console.log("save");
@@ -80,25 +83,18 @@ function ContentAdd($scope, $routeParams, $http) {
     };
 }
 
-function ContentElement(id, language, values) {
-    this.ContentElementId = id;
-    this.DefaultLanguage = language;
-    this.Values = values;
+function ContentElement(contentElementDto) {
+    this.ContentElementId = contentElementDto.ContentElementId;
+    this.DefaultLanguage = contentElementDto.DefaultLanguage;
+    this.Values = contentElementDto.TextContents;
     this.SelectedValue;
-
-    this.Languages = (function (values) {
-        var languages = [];
-        for (var i = 0; i < values.length; i++)
-            languages.push(values[i].Language);
-
-        return languages;
-    })(this.Values);
+    this.Languages = (this.Values.map(function (val) { return val.Language; }));
 
     this.changeLanguage = function (language) {
         this.SelectedValue = findValueWithLanguage(this.Values, language);
     };
 
-    this.changeLanguage(language);
+    this.changeLanguage(this.DefaultLanguage);
 
     function findValueWithLanguage(values, languageId) {
         for (var i = 0; i < values.length; i++)
