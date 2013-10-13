@@ -4,6 +4,7 @@
             .when('/', { controller: ContentList, templateUrl: 'ContentList.html' })
             .when('/edit/:contentId/', { controller: ContentEdit, templateUrl: 'ContentEdit.html' })
             .when('/edit/:contentId/:lang', { controller: ContentEdit, templateUrl: 'ContentEdit.html' })
+            .when('/add/:lang', { controller: ContentAdd, templateUrl: 'ContentEdit.html' })
             .otherwise({ redirectTo: '/' });
     });
 
@@ -65,6 +66,20 @@ function ContentEdit($scope, $routeParams, contentProvider) {
         if (lang) ce.changeLanguage(lang);
         $scope.contentElement = ce;
     }
+}
+
+function ContentAdd($scope, $routeParams) {
+    var value = {
+        Language: {
+            LanguageId: $routeParams.lang
+        }
+    };
+    $scope.contentElement = new ContentElement(-1, $routeParams.lang, [value]);
+
+    $scope.save = function () {
+        console.log("save");
+        console.log($scope.contentElement);
+    };
 }
 
 function ContentElement(id, language, values) {
