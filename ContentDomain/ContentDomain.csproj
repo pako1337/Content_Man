@@ -62,6 +62,8 @@
     <Compile Include="ContentStatus.cs" />
     <Compile Include="ContentType.cs" />
     <Compile Include="ContentElement.cs" />
+    <Compile Include="Dto\ContentElementDto.cs" />
+    <Compile Include="Dto\TextContentDto.cs" />
     <Compile Include="Factories\ContentElementFactory.cs" />
     <Compile Include="IContentValue.cs" />
     <Compile Include="Language.cs" />
