@@ -1,10 +1,9 @@
 ﻿var ContentModule = angular.module('Content', ['ui.bootstrap'])
     .config(function ($routeProvider) {
         $routeProvider
-            .when('/', { controller: ContentList, templateUrl: 'ContentList.html' })
-            .when('/edit/:contentId/', { controller: ContentEdit, templateUrl: 'ContentEdit.html' })
+            .when('/',                      { controller: ContentList, templateUrl: 'ContentList.html' })
             .when('/edit/:contentId/:lang', { controller: ContentEdit, templateUrl: 'ContentEdit.html' })
-            .when('/add/:lang', { controller: ContentAdd, templateUrl: 'ContentEdit.html' })
+            .when('/add/:lang',             { controller: ContentAdd,  templateUrl: 'ContentEdit.html' })
             .otherwise({ redirectTo: '/' });
     });
 
@@ -62,7 +61,7 @@ function ContentEdit($scope, $routeParams, contentProvider) {
     })();
 
     function setContentElement(ce, lang) {
-        if (lang) ce.changeLanguage(lang);
+        ce.changeLanguage(lang);
         $scope.contentElement = ce;
     }
 }
@@ -75,9 +74,6 @@ function ContentAdd($scope, $routeParams, $http) {
     });
 
     $scope.save = function () {
-        console.log("save");
-        console.log($scope.contentElement);
-
         $http.post('api/ContentElement/', $scope.contentElement);
     };
 }
