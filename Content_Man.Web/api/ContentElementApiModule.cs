@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ContentDomain;
+using ContentDomain.Dto;
 using ContentDomain.Repositories;
 using Nancy;
+using Nancy.ModelBinding;
 
 namespace Content_Man.Web.api
 {
@@ -15,9 +17,11 @@ namespace Content_Man.Web.api
         {
             Get["/"] = _ =>
             {
-                var list = new ContentElementRepository().All();
+                var list = new ContentElementRepository().All().AsDto();
 
-                var bytes = list.ToJson();
+                var serializer = new Nancy.Json.JavaScriptSerializer();
+                var ceString = serializer.Serialize(list);
+                var bytes = System.Text.Encoding.UTF8.GetBytes(ceString);
 
                 return new Response()
                     {
@@ -28,15 +32,7 @@ namespace Content_Man.Web.api
 
             Get["/{elementId}"] = arg =>
             {
-                var ce = new ContentElementRepository().Get(arg.elementId);
-
-                var jsonModel = 
-                    new
-                    {
-                        Id = ce.ContentElementId,
-                        DefaultLanguage = ce.DefaultLanguage,
-                        Values = ce.GetValues()
-                    };
+                var jsonModel = new ContentElementRepository().Get((int)arg.elementId).AsDto();
 
                 var serializer = new Nancy.Json.JavaScriptSerializer();
                 var ceString = serializer.Serialize(jsonModel);
@@ -49,34 +45,14 @@ namespace Content_Man.Web.api
                 };
             };
 
-            Get["/post"] = _ =>
+            Post["/"] = _ =>
             {
                 var repo = new ContentElementRepository();
-                var ce = repo.Get(1);
-                repo.Insert(ce);
+                var contentElement = this.Bind<ContentElementDto>();
+                //repo.Insert(ce);
 
                 return HttpStatusCode.OK;
             };
-        }
-    }
-
-    internal static class ContentElementExtension
-    {
-        public static byte[] ToJson(this IEnumerable<ContentElement> elements)
-        {
-            var jsonModel = elements.Select(ce =>
-                new
-                {
-                    Id = ce.ContentElementId,
-                    DefaultLanguage = ce.DefaultLanguage,
-                    Values = ce.GetValues()
-                });
-
-            var serializer = new Nancy.Json.JavaScriptSerializer();
-            var ceString = serializer.Serialize(jsonModel);
-            var bytes = System.Text.Encoding.UTF8.GetBytes(ceString);
-
-            return bytes;
         }
     }
 }
