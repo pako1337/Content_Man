@@ -25,11 +25,9 @@ ContentModule.factory('contentProvider', function ($http) {
         },
 
         getcontentElement: function (elementId, elementReady) {
-            var that = this;
             $http.get('api/ContentElement/' + elementId)
                 .success(function (data, status, headers, config) {
-                    var ce = new ContentElement(data);
-                    elementReady(ce);
+                    elementReady(new ContentElement(data));
                 })
                 .error(function (data, status, headers, config) {
                     console.log("Failed to get ContentElement: " + elementId);
@@ -49,20 +47,19 @@ function ContentEdit($scope, $routeParams, contentProvider) {
     $scope.contentElement = undefined;
 
     (function () {
-        for (var i = 0; i < contentProvider.contentElements.length; i++)
-            if (contentProvider.contentElements[i].ContentElementId == $routeParams.contentId) {
-                setContentElement(contentProvider.contentElements[i], $routeParams.lang);
-                return;
-            }
-
-        contentProvider.getcontentElement($routeParams.contentId, function (contentElement) {
-            setContentElement(contentElement, $routeParams.lang);
-        });
+        var elements = contentProvider.contentElements.filter(
+            function (e) { return e.ContentElementId === $routeParams.contentId });
+        if (elements.length > 0)
+            setContentElement(elements[0], $routeParams.lang);
+        else
+            contentProvider.getcontentElement(
+                $routeParams.contentId,
+                function (e) { setContentElement(e, $routeParams.lang) });
     })();
 
-    function setContentElement(ce, lang) {
-        ce.changeLanguage(lang);
-        $scope.contentElement = ce;
+    function setContentElement(contentElement, lang) {
+        contentElement.changeLanguage(lang);
+        $scope.contentElement = contentElement;
     }
 }
 
@@ -85,15 +82,13 @@ function ContentElement(contentElementDto) {
     this.SelectedValue;
     this.Languages = this.Values.map(function (val) { return val.Language; });
 
-    this.changeLanguage = function (language) {
-        this.SelectedValue = findValueWithLanguage(this.Values, language);
+    this.changeLanguage = function (lang) {
+        this.SelectedValue = findValueWithLanguage(this.Values, lang);
     };
 
     this.changeLanguage(this.DefaultLanguage);
 
-    function findValueWithLanguage(values, languageId) {
-        for (var i = 0; i < values.length; i++)
-            if (values[i].Language === languageId)
-                return values[i];
+    function findValueWithLanguage(values, lang) {
+        return values.filter(function (v) { return v.Language === lang })[0];
     }
 }
