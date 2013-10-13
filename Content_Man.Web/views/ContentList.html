@@ -4,11 +4,11 @@
         <div class="col-lg-3 col-xs-12">
             <div class="row col-xs-12">
                 <div class="dropdown">
-                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">{{element.SelectedValue.Language.LanguageId}}<b class="caret"></b>
+                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">{{element.SelectedValue.Language}}<b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li role="presentation" ng-repeat="language in element.Languages">
-                            <a ng-click="element.changeLanguage(language.LanguageId)">{{language.LanguageId}}</a>
+                            <a ng-click="element.changeLanguage(language)">{{language}}</a>
                         </li>
                     </ul>
                 </div>
@@ -16,7 +16,7 @@
             <div class="row col-xs-12">{{element.Category}}</div>
         </div>
         <div class="col-lg-1 col-xs-4">
-            <a href="#/edit/{{element.ContentElementId}}/{{element.SelectedValue.Language.LanguageId}}" class="btn btn-primary btn-xs">Edit</a>
+            <a href="#/edit/{{element.ContentElementId}}/{{element.SelectedValue.Language}}" class="btn btn-primary btn-xs">Edit</a>
         </div>
         <div class="col-lg-1 col-xs-4">
             <a href="#/delete" class="btn btn-danger btn-xs">Delete</a>

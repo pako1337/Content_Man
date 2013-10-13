@@ -17,7 +17,7 @@ ContentModule.factory('contentProvider', function ($http) {
                 .success(function (data, status, headers, config) {
                     that.contentElements.length = 0;
                     data.forEach(function (element) {
-                        var ce = new ContentElement(element.Id, element.DefaultLanguage, element.Values);
+                        var ce = new ContentElement(element.ContentElementId, element.DefaultLanguage, element.TextContents);
                         that.contentElements.push(ce);
                     })
                 })
@@ -30,7 +30,7 @@ ContentModule.factory('contentProvider', function ($http) {
             var that = this;
             $http.get('api/ContentElement/' + elementId)
                 .success(function (data, status, headers, config) {
-                    var ce = new ContentElement(data.Id, data.DefaultLanguage, data.Values);
+                    var ce = new ContentElement(data.Id, data.DefaultLanguage, data.TextContents);
                     elementReady(ce);
                 })
                 .error(function (data, status, headers, config) {
@@ -69,11 +69,7 @@ function ContentEdit($scope, $routeParams, contentProvider) {
 }
 
 function ContentAdd($scope, $routeParams, $http) {
-    var value = {
-        Language: {
-            LanguageId: $routeParams.lang
-        }
-    };
+    var value = { Language: $routeParams.lang };
     $scope.contentElement = new ContentElement(-1, $routeParams.lang, [value]);
 
     $scope.save = function () {
@@ -86,9 +82,10 @@ function ContentAdd($scope, $routeParams, $http) {
 
 function ContentElement(id, language, values) {
     this.ContentElementId = id;
+    this.DefaultLanguage = language;
     this.Values = values;
     this.SelectedValue;
-    this.DefaultLanguage = language;
+
     this.Languages = (function (values) {
         var languages = [];
         for (var i = 0; i < values.length; i++)
@@ -97,15 +94,15 @@ function ContentElement(id, language, values) {
         return languages;
     })(this.Values);
 
-    this.changeLanguage = function (languageId) {
-        this.SelectedValue = findValueWithLanguage(this.Values, languageId);
+    this.changeLanguage = function (language) {
+        this.SelectedValue = findValueWithLanguage(this.Values, language);
     };
 
-    this.changeLanguage(language.LanguageId);
+    this.changeLanguage(language);
 
     function findValueWithLanguage(values, languageId) {
         for (var i = 0; i < values.length; i++)
-            if (values[i].Language.LanguageId === languageId)
+            if (values[i].Language === languageId)
                 return values[i];
     }
 }

@@ -36,7 +36,7 @@ namespace ContentDomain.Repositories
 
         public void Insert(ContentElement contentElement)
         {
-            var contentElementDb = new ContentElementDto(contentElement);
+            var contentElementDb = contentElement.AsDto();
             var db = Database.Open();
             using (var tx = db.BeginTransaction())
             {
