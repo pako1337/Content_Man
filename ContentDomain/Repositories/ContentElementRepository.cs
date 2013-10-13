@@ -15,7 +15,7 @@ namespace ContentDomain.Repositories
         public IEnumerable<ContentElement> All()
         {
             var db = Database.Open();
-            List<ContentElementDb> dbElements = db.ContentElements.All().WithTextContents();
+            List<ContentElementDto> dbElements = db.ContentElements.All().WithTextContents();
 
             var elements = new List<ContentElement>();
             foreach (var element in dbElements)
@@ -27,7 +27,7 @@ namespace ContentDomain.Repositories
         public ContentElement Get(int contentElementId)
         {
             var db = Database.Open();
-            List<ContentElementDb> elements = db.ContentElements
+            List<ContentElementDto> elements = db.ContentElements
                 .FindAllByContentElementId(contentElementId)
                 .WithTextContents();
             return factory.Create(elements.FirstOrDefault());
@@ -35,7 +35,7 @@ namespace ContentDomain.Repositories
 
         public void Insert(ContentElement contentElement)
         {
-            var contentElementDb = new ContentElementDb(contentElement);
+            var contentElementDb = new ContentElementDto(contentElement);
             var db = Database.Open();
             using (var tx = db.BeginTransaction())
             {
@@ -50,17 +50,17 @@ namespace ContentDomain.Repositories
         }
     }
 
-    internal class ContentElementDb
+    internal class ContentElementDto
     {
         public int ContentElementId { get; set; }
         public ContentType ContentType { get; set; }
         public string DefaultLanguage { get; set; }
-        public List<TextContentDb> TextContents { get; set; }
+        public List<TextContentDto> TextContents { get; set; }
 
-        public ContentElementDb()
+        public ContentElementDto()
         { }
 
-        public ContentElementDb(ContentElement ce)
+        public ContentElementDto(ContentElement ce)
         {
             ContentElementId = ce.ContentElementId;
             ContentType = ce.ContentType;
@@ -68,12 +68,12 @@ namespace ContentDomain.Repositories
             TextContents = ce
                 .GetValues()
                 .OfType<TextContent>()
-                .Select(v => new TextContentDb(v, this))
+                .Select(v => new TextContentDto(v, this))
                 .ToList();
         }
     }
 
-    internal class TextContentDb
+    internal class TextContentDto
     {
         public int TextContentId { get; set; }
         public int ContentElementId { get; set; }
@@ -81,10 +81,10 @@ namespace ContentDomain.Repositories
         public string Value { get; set; }
         public string Language { get; set; }
 
-        public TextContentDb()
+        public TextContentDto()
         { }
 
-        public TextContentDb(TextContent tc, ContentElementDb ce)
+        public TextContentDto(TextContent tc, ContentElementDto ce)
         {
             TextContentId = tc.ContentValueId;
             ContentElementId = ce.ContentElementId;
