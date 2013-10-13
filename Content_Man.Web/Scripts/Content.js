@@ -16,10 +16,9 @@ ContentModule.factory('contentProvider', function ($http) {
             $http.get('/api/ContentElement')
                 .success(function (data, status, headers, config) {
                     that.contentElements.length = 0;
-                    data.forEach(function (element) {
-                        var ce = new ContentElement(element);
-                        that.contentElements.push(ce);
-                    })
+                    data
+                        .map(function (e) { return new ContentElement(e) })
+                        .forEach(function (e) { that.contentElements.push(e) });
                 })
                 .error(function (data, status, headers, config) {
                     console.log("Failed to get ContentElements");
@@ -88,7 +87,7 @@ function ContentElement(contentElementDto) {
     this.DefaultLanguage = contentElementDto.DefaultLanguage;
     this.Values = contentElementDto.TextContents;
     this.SelectedValue;
-    this.Languages = (this.Values.map(function (val) { return val.Language; }));
+    this.Languages = this.Values.map(function (val) { return val.Language; });
 
     this.changeLanguage = function (language) {
         this.SelectedValue = findValueWithLanguage(this.Values, language);
