@@ -50,4 +50,17 @@ namespace ContentDomain.Repositories
             }
         }
     }
+
+    public static class ContentElementRepositoryExtension
+    {
+        public static ContentElementDto AsDto(this ContentElement contentElement)
+        {
+            return new ContentElementDto(contentElement);
+        }
+
+        public static IEnumerable<ContentElementDto> AsDto(this IEnumerable<ContentElement> contentElements)
+        {
+            return contentElements.Select(ce => new ContentElementDto(ce));
+        }
+    }
 }
