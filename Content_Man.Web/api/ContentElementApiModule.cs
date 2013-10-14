@@ -49,7 +49,7 @@ namespace Content_Man.Web.api
             {
                 var repo = new ContentElementRepository();
                 var contentElement = this.Bind<ContentElementDto>();
-                //repo.Insert(ce);
+                repo.Insert(new ContentDomain.Factories.ContentElementFactory().Create(contentElement));
 
                 return HttpStatusCode.OK;
             };
