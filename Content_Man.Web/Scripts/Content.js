@@ -79,6 +79,7 @@ function ContentElement(contentElementDto) {
     this.ContentElementId = contentElementDto.ContentElementId;
     this.DefaultLanguage = contentElementDto.DefaultLanguage;
     this.TextContents = contentElementDto.TextContents;
+    this.ContentType = 1;
     this.SelectedValue;
     this.Languages = this.TextContents.map(function (val) { return val.Language; });
 
