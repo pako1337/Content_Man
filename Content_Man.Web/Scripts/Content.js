@@ -78,12 +78,12 @@ function ContentAdd($scope, $routeParams, $http) {
 function ContentElement(contentElementDto) {
     this.ContentElementId = contentElementDto.ContentElementId;
     this.DefaultLanguage = contentElementDto.DefaultLanguage;
-    this.Values = contentElementDto.TextContents;
+    this.TextContents = contentElementDto.TextContents;
     this.SelectedValue;
-    this.Languages = this.Values.map(function (val) { return val.Language; });
+    this.Languages = this.TextContents.map(function (val) { return val.Language; });
 
     this.changeLanguage = function (lang) {
-        this.SelectedValue = findValueWithLanguage(this.Values, lang);
+        this.SelectedValue = findValueWithLanguage(this.TextContents, lang);
     };
 
     this.changeLanguage(this.DefaultLanguage);
