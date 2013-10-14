@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ContentDomain.Dto;
 using ContentDomain.Factories;
 using FluentAssertions;
 using Xunit;
@@ -55,25 +56,58 @@ namespace ContentDomain.Test
         [Fact]
         public void should_populate_ContentElement_with_text_values()
         {
-            dynamic value1 = new System.Dynamic.ExpandoObject();
-            value1.TextContentId = 1;
-            value1.ContentStatus = (int)ContentStatus.Draft;
-            value1.Language = "en";
-            value1.Value = "english";
+            dynamic inputValue = new System.Dynamic.ExpandoObject();
+            inputValue.TextContentId = 1;
+            inputValue.ContentStatus = (int)ContentStatus.Draft;
+            inputValue.Language = "en";
+            inputValue.Value = "english";
 
             dynamic dynamicElement = GetSampleDynamicContentElement();
-            dynamicElement.TextContents = new[] { value1 };
+            dynamicElement.TextContents = new[] { inputValue };
 
             ContentElement contentElement = factory.Create(dynamicElement);
             var values = contentElement.GetValues();
 
             values.Count().Should().Be(1);
+
+            var value = values.First();
+            value.ContentValueId.Should().Be(1);
+            value.Language.LanguageId.Should().Be("en");
+            value.Status.Should().Be(ContentStatus.Draft);
         }
 
         [Fact]
         public void should_not_throw_when_textContents_are_null()
         {
             ContentElement contentElement = factory.Create(GetSampleDynamicContentElement());
+        }
+
+        [Fact]
+        public void should_create_ContentElement_based_on_Dto()
+        {
+            var dto = new ContentElementDto()
+            {
+                ContentElementId = 1,
+                ContentType = ContentType.Text,
+                DefaultLanguage = "en",
+                TextContents = new List<TextContentDto>
+                {
+                    new TextContentDto()
+                    {
+                        ContentElementId = 1,
+                        ContentStatus = ContentStatus.Complete,
+                        Language = "en",
+                        TextContentId = 2,
+                        Value = "test"
+                    }
+                }
+            };
+
+            ContentElement ce = factory.Create(dto);
+
+            ce.ContentElementId.Should().Be(1);
+            ce.ContentType.Should().Be(ContentType.Text);
+            ce.DefaultLanguage.LanguageId.Should().Be("en");
         }
 
         private dynamic GetSampleDynamicContentElement(ContentType type = ContentType.Text)
