@@ -18,22 +18,36 @@ namespace Content_Man.Web.Api
             Get["/"] = _ =>
             {
                 var list = new ContentElementRepository().All().AsDto();
-                return Response.AsJson<IEnumerable<ContentElementDto>>(list, HttpStatusCode.OK);
+                return Response.AsJson<IEnumerable<ContentElementDto>>(list);
             };
 
             Get["/{elementId}"] = arg =>
             {
                 var jsonModel = new ContentElementRepository().Get((int)arg.elementId).AsDto();
-                return Response.AsJson<ContentElementDto>(jsonModel, HttpStatusCode.OK);
+                return Response.AsJson<ContentElementDto>(jsonModel);
             };
 
             Post["/"] = _ =>
             {
-                var repo = new ContentElementRepository();
                 var contentElement = this.Bind<ContentElementDto>();
-                repo.Insert(new ContentDomain.Factories.ContentElementFactory().Create(contentElement));
+                var service = new ContentDomain.ApplicationServices.ContentElementService();
+                try
+                {
+                    service.InsertNewContentElement(contentElement);
+                    return HttpStatusCode.OK;
+                }
+                catch (Exception ex)
+                {
+                    if (ex is ArgumentException || ex is ArgumentNullException)
+                        return new Response()
+                        {
+                            StatusCode = HttpStatusCode.BadRequest,
+                            ContentType = "text/plain",
+                            Contents = s => (new System.IO.StreamWriter(s) { AutoFlush = true }).Write(ex.Message)
+                        };
 
-                return HttpStatusCode.OK;
+                    throw;
+                }
             };
         }
     }
