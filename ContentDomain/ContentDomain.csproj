@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationServices\ContentElementService.cs" />
     <Compile Include="ContentStatus.cs" />
     <Compile Include="ContentType.cs" />
     <Compile Include="ContentElement.cs" />
