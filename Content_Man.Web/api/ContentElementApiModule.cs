@@ -8,7 +8,7 @@ using ContentDomain.Repositories;
 using Nancy;
 using Nancy.ModelBinding;
 
-namespace Content_Man.Web.api
+namespace Content_Man.Web.Api
 {
     public class ContentElementApiModule : Nancy.NancyModule
     {
