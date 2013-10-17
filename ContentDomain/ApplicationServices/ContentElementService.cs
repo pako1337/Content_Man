@@ -18,8 +18,12 @@ namespace ContentDomain.ApplicationServices
                 var ce = new ContentDomain.Factories.ContentElementFactory().Create(contentElement);
                 repo.Insert(ce);
             }
-            catch (ArgumentException ae)
+            catch (Exception ex)
             {
+                if (ex is ArgumentException || ex is ArgumentNullException)
+                    throw new DomainException("Error occured when trying to insert ContentElement: " + ex.Message);
+
+                throw;
             }
         }
     }

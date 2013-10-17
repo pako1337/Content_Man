@@ -36,17 +36,14 @@ namespace Content_Man.Web.Api
                     service.InsertNewContentElement(contentElement);
                     return HttpStatusCode.OK;
                 }
-                catch (Exception ex)
+                catch (DomainException ex)
                 {
-                    if (ex is ArgumentException || ex is ArgumentNullException)
-                        return new Response()
-                        {
-                            StatusCode = HttpStatusCode.BadRequest,
-                            ContentType = "text/plain",
-                            Contents = s => (new System.IO.StreamWriter(s) { AutoFlush = true }).Write(ex.Message)
-                        };
-
-                    throw;
+                    return new Response()
+                    {
+                        StatusCode = HttpStatusCode.BadRequest,
+                        ContentType = "text/plain",
+                        Contents = s => (new System.IO.StreamWriter(s) { AutoFlush = true }).Write(ex.Message)
+                    };
                 }
             };
         }
