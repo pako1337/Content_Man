@@ -408,6 +408,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\ContentElementApiModule.cs" />
+    <Compile Include="Api\ResponseExtensions.cs" />
     <Compile Include="ContentModule.cs" />
     <Compile Include="CustomBootstraper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

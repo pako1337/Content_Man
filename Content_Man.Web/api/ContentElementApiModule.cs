@@ -38,12 +38,21 @@ namespace Content_Man.Web.Api
                 }
                 catch (DomainException ex)
                 {
-                    return new Response()
-                    {
-                        StatusCode = HttpStatusCode.BadRequest,
-                        ContentType = "text/plain",
-                        Contents = s => (new System.IO.StreamWriter(s) { AutoFlush = true }).Write(ex.Message)
-                    };
+                    return Response.FromException(ex);
+                }
+            };
+
+            Put["/{elementId}"] = args =>
+            {
+                var contentElement = this.Bind<ContentElementDto>();
+                var service = new ContentDomain.ApplicationServices.ContentElementService();
+                try
+                {
+                    return HttpStatusCode.OK;
+                }
+                catch (DomainException ex)
+                {
+                    return Response.FromException(ex);
                 }
             };
         }
