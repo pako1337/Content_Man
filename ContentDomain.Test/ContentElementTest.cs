@@ -74,7 +74,7 @@ namespace ContentDomain.Test
         }
 
         [Fact]
-        public void should_throw_null_exception_when_adding_collection_with_null()
+        public void should_throw_argument_exception_when_adding_collection_with_null()
         {
             var contents = new[]
             {
@@ -82,7 +82,7 @@ namespace ContentDomain.Test
                 null
             };
 
-            Assert.Throws<NullReferenceException>(() => CreateDefaultContentElement().AddValues(contents));
+            Assert.Throws<ArgumentException>(() => CreateDefaultContentElement().AddValues(contents));
         }
 
         [Fact]

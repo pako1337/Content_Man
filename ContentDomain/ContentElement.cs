@@ -55,13 +55,17 @@ namespace ContentDomain
         {
             if (values == null) throw new ArgumentNullException("values");
 
-            var defaultVal = values.SingleOrDefault(v => v.Language.Equals(this.DefaultLanguage));
+            var listOfValues = values.ToList();
+            if (listOfValues.Any(v => v == null)) throw new ArgumentException("Value cannot be null", "values");
+
+            var defaultVal = listOfValues.SingleOrDefault(v => v.Language.Equals(this.DefaultLanguage));
             if (_values.Count == 0 && defaultVal == null)
                 throw new ArgumentException("One of first added values must be of default language", "values");
 
             this.AddValue(defaultVal);
+            listOfValues.Remove(defaultVal);
 
-            foreach (var v in values.Where(v => !v.Language.Equals(this.DefaultLanguage)))
+            foreach (var v in values)
                 this.AddValue(v);
         }
 
