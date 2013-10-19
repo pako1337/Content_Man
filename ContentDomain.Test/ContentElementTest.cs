@@ -52,6 +52,22 @@ namespace ContentDomain.Test
         }
 
         [Fact]
+        public void should_accept_multiple_values_added_when_at_least_one_is_default_language()
+        {
+            var contentElement = CreateDefaultContentElement();
+            var contents = new[]
+            {
+                ValueStub.Create().WithLanguage(new Language("en")),
+                ValueStub.Create().WithLanguage(Language.Invariant)
+            };
+
+            contentElement.AddValues(contents);
+
+            var actual = contentElement.GetValues();
+            actual.Count().Should().Be(2);
+        }
+
+        [Fact]
         public void should_hold_multiple_values()
         {
             var contentElement = CreateDefaultContentElement();

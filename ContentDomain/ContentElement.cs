@@ -60,5 +60,17 @@ namespace ContentDomain
                     string.Format("Value for language {0} not present", language.Name),
                     "language");
         }
+
+        public void AddValues(IEnumerable<IContentValue> values)
+        {
+            var defaultVal = values.SingleOrDefault(v => v.Language.Equals(this.DefaultLanguage));
+            if (_values.Count == 0 && defaultVal == null)
+                throw new ArgumentException("One of first added values must be of default language", "values");
+
+            this.AddValue(defaultVal);
+
+            foreach (var v in values.Where(v => !v.Language.Equals(this.DefaultLanguage)))
+                this.AddValue(v);
+        }
     }
 }
