@@ -16,7 +16,7 @@ namespace ContentDomain.Repositories
         public IEnumerable<ContentElement> All()
         {
             var db = Database.Open();
-            List<ContentElementDto> dbElements = db.ContentElements.All().WithTextContents();
+            List<ContentElementDto> dbElements = db.ContentElements.All().OrderByContentElementId().WithTextContents();
 
             var elements = new List<ContentElement>();
             foreach (var element in dbElements)
