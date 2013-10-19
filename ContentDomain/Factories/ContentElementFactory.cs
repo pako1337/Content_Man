@@ -21,11 +21,7 @@ namespace ContentDomain.Factories
                 (ContentType)dynamicElement.ContentType);
 
             if (dynamicElement.TextContents != null)
-                foreach (var value in dynamicElement.TextContents)
-                {
-                    TextContent text = CreateTextContent(value);
-                    contentElement.AddValue(text);
-                }
+                contentElement.AddValues(GetTextContents(dynamicElement));
 
             return contentElement;
         }
@@ -38,6 +34,12 @@ namespace ContentDomain.Factories
                 Status = (ContentStatus)value.ContentStatus,
                 Value = value.Value
             };
+        }
+
+        private IEnumerable<TextContent> GetTextContents(dynamic contentElement)
+        {
+            foreach (var value in contentElement.TextContents)
+                yield return CreateTextContent(value);
         }
     }
 }
