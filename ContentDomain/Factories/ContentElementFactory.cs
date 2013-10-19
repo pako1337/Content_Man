@@ -23,16 +23,21 @@ namespace ContentDomain.Factories
             if (dynamicElement.TextContents != null)
                 foreach (var value in dynamicElement.TextContents)
                 {
-                    TextContent text = new TextContent(Language.Create(value.Language))
-                    {
-                        ContentValueId = value.TextContentId,
-                        Status = (ContentStatus)value.ContentStatus,
-                        Value = value.Value
-                    };
+                    TextContent text = CreateTextContent(value);
                     contentElement.AddValue(text);
                 }
 
             return contentElement;
+        }
+
+        public TextContent CreateTextContent(dynamic value)
+        {
+            return new TextContent(Language.Create(value.Language))
+            {
+                ContentValueId = value.TextContentId,
+                Status = (ContentStatus)value.ContentStatus,
+                Value = value.Value
+            };
         }
     }
 }

@@ -110,6 +110,23 @@ namespace ContentDomain.Test
             ce.DefaultLanguage.LanguageId.Should().Be("en");
         }
 
+        [Fact]
+        public void should_create_TextContent_from_dynamic()
+        {
+            dynamic inputValue = new System.Dynamic.ExpandoObject();
+            inputValue.TextContentId = 1;
+            inputValue.ContentStatus = (int)ContentStatus.Draft;
+            inputValue.Language = "en";
+            inputValue.Value = "english";
+
+            TextContent textContent = factory.CreateTextContent(inputValue);
+
+            textContent.ContentValueId.Should().Be(1);
+            textContent.Status.Should().Be(ContentStatus.Draft);
+            textContent.Language.LanguageId.Should().Be("en");
+            textContent.Value.Should().Be("english");
+        }
+
         private dynamic GetSampleDynamicContentElement(ContentType type = ContentType.Text)
         {
             dynamic dynamicElement = new System.Dynamic.ExpandoObject();
