@@ -37,10 +37,7 @@ namespace ContentDomain
 
         public IContentValue GetValue(Language language)
         {
-            if (!_values.ContainsKey(language))
-                throw new ArgumentException(
-                    string.Format("Value for language {0} not present", language.Name),
-                    "language");
+            CheckValueWithLanguagePresent(language);
             return _values[language];
         }
 
@@ -51,12 +48,17 @@ namespace ContentDomain
 
         public void UpdateValue(TextContent content)
         {
-            if (!_values.ContainsKey(content.Language))
-                throw new ArgumentException(
-                    string.Format("Value for language {0} not present", content.Language.Name),
-                    "content");
+            CheckValueWithLanguagePresent(content.Language);
             var value = (TextContent)_values[content.Language];
             value.SetValue(content.Value);
+        }
+
+        private void CheckValueWithLanguagePresent(Language language)
+        {
+            if (!_values.ContainsKey(language))
+                throw new ArgumentException(
+                    string.Format("Value for language {0} not present", language.Name),
+                    "language");
         }
     }
 }

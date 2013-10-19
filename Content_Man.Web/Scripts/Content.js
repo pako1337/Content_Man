@@ -43,7 +43,7 @@ function ContentList($scope, contentProvider) {
         contentProvider.getContentElements();
 }
 
-function ContentEdit($scope, $routeParams, contentProvider) {
+function ContentEdit($scope, $routeParams, contentProvider, $http) {
     $scope.contentElement = undefined;
 
     (function () {
@@ -60,6 +60,10 @@ function ContentEdit($scope, $routeParams, contentProvider) {
     function setContentElement(contentElement, lang) {
         contentElement.changeLanguage(lang);
         $scope.contentElement = contentElement;
+    }
+
+    $scope.save = function () {
+        $http.put('api/ContentElement/' + $scope.contentElement.ContentElementId, $scope.contentElement);
     }
 }
 

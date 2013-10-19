@@ -48,6 +48,7 @@ namespace Content_Man.Web.Api
                 var service = new ContentDomain.ApplicationServices.ContentElementService();
                 try
                 {
+                    service.UpdateContentElement((int)args.elementId, contentElement);
                     return HttpStatusCode.OK;
                 }
                 catch (DomainException ex)

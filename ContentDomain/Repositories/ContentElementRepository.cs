@@ -49,6 +49,18 @@ namespace ContentDomain.Repositories
                 tx.Commit();
             }
         }
+
+        public void Update(ContentElement contentElement)
+        {
+            var contentElementDb = contentElement.AsDto();
+            var db = Database.Open();
+            using (var tx = db.BeginTransaction())
+            {
+                tx.ContentElements.Update(contentElementDb);
+                tx.TextContents.Update(contentElementDb.TextContents);
+                tx.Commit();
+            }
+        }
     }
 
     public static class ContentElementRepositoryExtension
