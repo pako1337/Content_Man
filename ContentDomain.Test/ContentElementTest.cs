@@ -68,6 +68,24 @@ namespace ContentDomain.Test
         }
 
         [Fact]
+        public void should_throw_null_exception_when_adding_null_collection()
+        {
+            Assert.Throws<ArgumentNullException>(() => CreateDefaultContentElement().AddValues(null));
+        }
+
+        [Fact]
+        public void should_throw_null_exception_when_adding_collection_with_null()
+        {
+            var contents = new[]
+            {
+                ValueStub.Create().WithLanguage(Language.Invariant),
+                null
+            };
+
+            Assert.Throws<NullReferenceException>(() => CreateDefaultContentElement().AddValues(contents));
+        }
+
+        [Fact]
         public void should_hold_multiple_values()
         {
             var contentElement = CreateDefaultContentElement();

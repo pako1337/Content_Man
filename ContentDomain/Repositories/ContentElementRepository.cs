@@ -16,13 +16,13 @@ namespace ContentDomain.Repositories
         public IEnumerable<ContentElement> All()
         {
             var db = Database.Open();
-            List<ContentElementDto> dbElements = db.ContentElements.All().OrderByContentElementId().WithTextContents();
+            List<ContentElementDto> dbElements = db.ContentElements
+                .All()
+                .OrderByContentElementId()
+                .WithTextContents();
 
-            var elements = new List<ContentElement>();
             foreach (var element in dbElements)
-                elements.Add(factory.Create(element));
-
-            return elements;
+                yield return factory.Create(element);
         }
 
         public ContentElement Get(int contentElementId)
@@ -45,7 +45,6 @@ namespace ContentDomain.Repositories
                     textContent.ContentElementId = ce.ContentElementId;
 
                 tx.TextContents.Insert(contentElementDb.TextContents);
-
                 tx.Commit();
             }
         }
@@ -63,7 +62,7 @@ namespace ContentDomain.Repositories
         }
     }
 
-    public static class ContentElementRepositoryExtension
+    public static class ContentElementDtoExtension
     {
         public static ContentElementDto AsDto(this ContentElement contentElement)
         {
