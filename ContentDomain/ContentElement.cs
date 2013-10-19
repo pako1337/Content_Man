@@ -48,5 +48,15 @@ namespace ContentDomain
         {
             return _values.Values;
         }
+
+        public void UpdateValue(TextContent content)
+        {
+            if (!_values.ContainsKey(content.Language))
+                throw new ArgumentException(
+                    string.Format("Value for language {0} not present", content.Language.Name),
+                    "content");
+            var value = (TextContent)_values[content.Language];
+            value.SetValue(content.Value);
+        }
     }
 }

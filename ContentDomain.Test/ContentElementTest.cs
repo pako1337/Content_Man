@@ -86,11 +86,29 @@ namespace ContentDomain.Test
             Assert.Throws<ArgumentException>(() => contentElement.AddValue(content));
         }
 
+        [Fact]
+        public void should_update_content_value()
+        {
+            var contentElement = CreateDefaultContentElement();
+            var content = new TextContent(Language.Invariant);
+            content.SetValue("before");
+
+            contentElement.AddValue(content);
+
+            content = new TextContent(Language.Invariant);
+            content.SetValue("after");
+
+            contentElement.UpdateValue(content);
+
+            TextContent result = (TextContent)contentElement.GetValue(Language.Invariant);
+            result.Value.Should().Be("after");
+        }
+
         private ContentElement CreateDefaultContentElement()
         {
             return new ContentElement(0, Language.Invariant, ContentType.Text);
         }
-        
+
         private class ValueStub : IContentValue
         {
             private Language _language = null;
