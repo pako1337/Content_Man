@@ -28,12 +28,15 @@ namespace ContentDomain
             Status = ContentStatus.Complete;
         }
 
-        public void SetValue(string value)
+        public void SetValue(object value)
         {
-            if (String.CompareOrdinal(value, Value) == 0)
+            if (!(value is string))
+                throw new ArgumentException("Argument must be string", "value");
+            string _value = (string)value;
+            if (String.CompareOrdinal(_value, Value) == 0)
                 return;
 
-            Value = value;
+            Value = _value;
             Status = ContentStatus.Draft;
         }
     }

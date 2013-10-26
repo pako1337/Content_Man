@@ -168,6 +168,11 @@ namespace ContentDomain.Test
                 ContentType = contentType;
                 return this;
             }
+
+            public void SetValue(object value)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

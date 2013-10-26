@@ -22,6 +22,12 @@ namespace ContentDomain.Test
         }
 
         [Fact]
+        public void should_throw_ArgumentException_when_value_set_to_not_string()
+        {
+            Assert.Throws<ArgumentException>(() => CreateEmptyTextContent().SetValue(new object()));
+        }
+
+        [Fact]
         public void should_hold_text_value()
         {
             var content = CreateEmptyTextContent();
@@ -56,7 +62,7 @@ namespace ContentDomain.Test
 
         private TextContent CreateEmptyTextContent()
         {
-            return new TextContent(new Language("pl-PL"));
+            return new TextContent(Language.Create("pl-PL"));
         }
     }
 }

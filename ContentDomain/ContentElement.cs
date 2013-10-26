@@ -10,9 +10,9 @@ namespace ContentDomain
     {
         private Dictionary<Language, IContentValue> _values = new Dictionary<Language, IContentValue>();
 
-        public int          ContentElementId { get; private set; }
-        public ContentType  ContentType { get; private set; }
-        public Language     DefaultLanguage { get; private set; }
+        public int ContentElementId { get; private set; }
+        public ContentType ContentType { get; private set; }
+        public Language DefaultLanguage { get; private set; }
 
         public ContentElement(int id, Language defaultLanguage, ContentType contentType)
         {
