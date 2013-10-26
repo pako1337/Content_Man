@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,10 +36,12 @@ namespace ContentDomain
 
         public void AddValues(IEnumerable<IContentValue> values)
         {
-            if (values == null) throw new ArgumentNullException("values");
+            if (values == null)
+                throw new ArgumentNullException("values");
 
             var listOfValues = values.ToList();
-            if (listOfValues.Any(v => v == null)) throw new ArgumentException("Value cannot be null", "values");
+            if (listOfValues.Any(v => v == null))
+                throw new ArgumentException("Value cannot be null", "values");
 
             var defaultVal = listOfValues.SingleOrDefault(v => v.Language.Equals(this.DefaultLanguage));
             if (_values.Count == 0 && defaultVal == null)
@@ -57,9 +60,9 @@ namespace ContentDomain
             return _values[language];
         }
 
-        public IEnumerable<IContentValue> GetValues()
+        public IImmutableList<IContentValue> GetValues()
         {
-            return _values.Values;
+            return ImmutableList.CreateRange(_values.Values);
         }
 
         public void UpdateValue(IContentValue content)
