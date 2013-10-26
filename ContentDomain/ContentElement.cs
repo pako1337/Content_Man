@@ -33,27 +33,6 @@ namespace ContentDomain
             _values[value.Language] = value;
         }
 
-        public IContentValue GetValue(Language language)
-        {
-            CheckValueWithLanguagePresent(language);
-            return _values[language];
-        }
-
-        public IEnumerable<IContentValue> GetValues()
-        {
-            return _values.Values;
-        }
-
-        public void UpdateValue(IContentValue content)
-        {
-            if (content.ContentType != this.ContentType)
-                throw new ArgumentException("Value to update has different ContentType", "content");
-
-            CheckValueWithLanguagePresent(content.Language);
-            var value = _values[content.Language];
-            value.SetValue(content.GetValue());
-        }
-
         public void AddValues(IEnumerable<IContentValue> values)
         {
             if (values == null) throw new ArgumentNullException("values");
@@ -72,7 +51,28 @@ namespace ContentDomain
                 this.AddValue(v);
         }
 
-        private void CheckValueWithLanguagePresent(Language language)
+        public IContentValue GetValue(Language language)
+        {
+            ThrowIfValueWithLanguageNotPresent(language);
+            return _values[language];
+        }
+
+        public IEnumerable<IContentValue> GetValues()
+        {
+            return _values.Values;
+        }
+
+        public void UpdateValue(IContentValue content)
+        {
+            if (content.ContentType != this.ContentType)
+                throw new ArgumentException("Value to update has different ContentType", "content");
+
+            ThrowIfValueWithLanguageNotPresent(content.Language);
+            var value = _values[content.Language];
+            value.SetValue(content.GetValue());
+        }
+
+        private void ThrowIfValueWithLanguageNotPresent(Language language)
         {
             if (!_values.ContainsKey(language))
                 throw new ArgumentException(
