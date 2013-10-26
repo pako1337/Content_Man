@@ -34,7 +34,7 @@ namespace Content_Man.Web.Api
                 try
                 {
                     service.InsertNewContentElement(contentElement);
-                    return HttpStatusCode.OK;
+                    return HttpStatusCode.Created;
                 }
                 catch (DomainException ex)
                 {

@@ -9,13 +9,9 @@ namespace ContentDomain
     public class TextContent : IContentValue
     {
         public int ContentValueId { get; internal set; }
-
         public ContentType ContentType { get { return ContentType.Text; } }
-
         public ContentStatus Status { get; internal set; }
-
         public string Value { get; internal set; }
-
         public Language Language { get; internal set; }
 
         public TextContent(Language language)
