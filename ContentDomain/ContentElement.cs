@@ -44,11 +44,14 @@ namespace ContentDomain
             return _values.Values;
         }
 
-        public void UpdateValue(TextContent content)
+        public void UpdateValue(IContentValue content)
         {
+            if (content.ContentType != this.ContentType)
+                throw new ArgumentException("Value to update has different ContentType", "content");
+
             CheckValueWithLanguagePresent(content.Language);
-            var value = (TextContent)_values[content.Language];
-            value.SetValue(content.Value);
+            var value = _values[content.Language];
+            value.SetValue(content.GetValue());
         }
 
         public void AddValues(IEnumerable<IContentValue> values)

@@ -138,6 +138,17 @@ namespace ContentDomain.Test
             result.Value.Should().Be("after");
         }
 
+        [Fact]
+        public void should_throw_ArgumentException_when_value_to_update_has_different_type()
+        {
+            var contentElement = CreateDefaultContentElement();
+            var content = ValueStub.Create().WithContentType(ContentType.Text).WithLanguage(Language.Invariant);
+            contentElement.AddValue(content);
+
+            var updateContent = ValueStub.Create().WithContentType(ContentType.List).WithLanguage(Language.Invariant);
+            Assert.Throws<ArgumentException>(() => contentElement.UpdateValue(updateContent));
+        }
+
         private ContentElement CreateDefaultContentElement()
         {
             return new ContentElement(0, Language.Invariant, ContentType.Text);
