@@ -60,6 +60,20 @@ namespace ContentDomain.Test
             CreateEmptyTextContent().Language.Should().NotBeNull();
         }
 
+        [Fact]
+        public void should_return_null_for_newly_created_object()
+        {
+            CreateEmptyTextContent().GetValue().Should().BeNull();
+        }
+
+        [Fact]
+        public void should_return_set_value()
+        {
+            var content = CreateEmptyTextContent();
+            content.SetValue("text");
+            content.GetValue().Should().Be("text");
+        }
+
         private TextContent CreateEmptyTextContent()
         {
             return new TextContent(Language.Create("pl-PL"));

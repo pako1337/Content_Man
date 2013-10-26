@@ -13,6 +13,7 @@ namespace ContentDomain
         ContentStatus Status { get; }
         Language Language { get; }
         void SetValue(object value);
+        object GetValue();
         void MarkComplete();
     }
 }

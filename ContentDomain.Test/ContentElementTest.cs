@@ -169,10 +169,8 @@ namespace ContentDomain.Test
                 return this;
             }
 
-            public void SetValue(object value)
-            {
-                throw new NotImplementedException();
-            }
+            public void SetValue(object value) { }
+            public object GetValue() { return null; }
         }
     }
 }

@@ -39,5 +39,10 @@ namespace ContentDomain
             Value = _value;
             Status = ContentStatus.Draft;
         }
+
+        public object GetValue()
+        {
+            return Value;
+        }
     }
 }
