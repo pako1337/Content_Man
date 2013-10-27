@@ -16,6 +16,7 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li><a href="/#/">Content Elements</a></li>
                     <li><a href="Language">Languages</a></li>
+                    <li><a href="Document">Documents</a></li>
                 </ul>
             </div>
             <div class="col-sm-9">

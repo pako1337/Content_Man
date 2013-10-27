@@ -420,6 +420,7 @@
     <Content Include="packages.config" />
     <Content Include="views\Master.sshtml" />
     <Content Include="views\Language.sshtml" />
+    <Content Include="views\Document.sshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,12 @@
+﻿@Master['Master']
+
+@Section['Content']
+<div ng-app="Content">
+    <div class="row">
+        <h3>Documents!</h3>
+    </div>
+</div>
+@EndSection
+
+@Section['Scripts']
+@EndSection
