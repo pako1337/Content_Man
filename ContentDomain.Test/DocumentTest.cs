@@ -45,6 +45,12 @@ namespace ContentDomain.Test
             doc.Name.Should().Be("Test name");
         }
 
+        [Fact]
+        public void should_have_at_least_one_section()
+        {
+            CreateDocument().GetSections().Count.Should().BeGreaterOrEqualTo(1);
+        }
+
         private static ContentElement CreateNewContentElement()
         {
             return new ContentElementFactory().Create(Language.InvariantCode, ContentType.Text);
@@ -52,7 +58,12 @@ namespace ContentDomain.Test
 
         private static Document CreateDocument(string name = "test")
         {
-            return new Document(-1, name);
+            return new Document(-1, name, new[] { new SectionStub() });
+        }
+
+        private class SectionStub : IDocumentSection
+        {
+
         }
     }
 }
