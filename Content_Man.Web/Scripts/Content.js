@@ -1,10 +1,10 @@
 ﻿var ContentModule = angular.module('Content', ['ui.bootstrap'])
     .config(function ($routeProvider) {
         $routeProvider
-            .when('/',                      { controller: ContentList, templateUrl: 'ContentList.html' })
+            .when('',                       { controller: ContentList, templateUrl: 'ContentList.html' })
             .when('/edit/:contentId/:lang', { controller: ContentEdit, templateUrl: 'ContentEdit.html' })
             .when('/add/:lang',             { controller: ContentAdd,  templateUrl: 'ContentEdit.html' })
-            .otherwise({ redirectTo: '/' });
+            .otherwise({ redirectTo: '' });
     });
 
 ContentModule.factory('contentProvider', function ($http) {
