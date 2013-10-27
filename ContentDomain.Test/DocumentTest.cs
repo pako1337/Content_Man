@@ -52,6 +52,24 @@ namespace ContentDomain.Test
             CreateDocument().GetSections().Count.Should().BeGreaterOrEqualTo(1);
         }
 
+        [Fact]
+        public void should_throw_ArgumentException_when_no_section_provided()
+        {
+            Assert.Throws<ArgumentException>(() => new Document(-1, "test", new List<IDocumentSection>()));
+        }
+
+        [Fact]
+        public void should_throw_ArgumentNullException_when_name_not_provided()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Document(-1, null, new[] { new SectionStub() }));
+        }
+
+        [Fact]
+        public void should_throw_ArgumentException_when_name_is_empty()
+        {
+            Assert.Throws<ArgumentException>(() => new Document(-1, "", new[] { new SectionStub() }));
+        }
+
         private static ContentElement CreateNewContentElement()
         {
             return new ContentElementFactory().Create(Language.InvariantCode, ContentType.Text);

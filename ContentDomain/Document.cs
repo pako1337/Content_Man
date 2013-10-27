@@ -18,9 +18,17 @@ namespace ContentDomain
 
         public Document(int id, string name, IEnumerable<IDocumentSection> sections)
         {
+            if (name == null)
+                throw new ArgumentNullException("name");
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Name cannot be empty", "name");
+            if (sections.Count() == 0)
+                throw new ArgumentException("At least one section required", "sections");
+
             DocumentId = id;
             Name = name;
             Status = DocumentStatus.Open;
+
             _content = new List<ContentElement>();
             _sections = sections.ToList();
         }
