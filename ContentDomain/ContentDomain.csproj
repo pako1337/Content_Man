@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationServices\ContentElementService.cs" />
+    <Compile Include="Document.cs" />
+    <Compile Include="DocumentStatus.cs" />
     <Compile Include="DomainException.cs" />
     <Compile Include="ContentStatus.cs" />
     <Compile Include="ContentType.cs" />
