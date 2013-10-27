@@ -7,6 +7,7 @@ using Xunit;
 using Xunit.Extensions;
 using FluentAssertions;
 using ContentDomain.Factories;
+using System.Collections.Immutable;
 
 namespace ContentDomain.Test
 {
@@ -20,11 +21,18 @@ namespace ContentDomain.Test
         }
 
         [Fact]
+        public void should_have_name()
+        {
+            var doc = CreateDocument("Test name");
+            doc.Name.Should().Be("Test name");
+        }
+
+        [Fact]
         public void should_hold_content()
         {
             var doc = CreateDocument();
             var content = CreateNewContentElement();
-            doc.AddContent(content);
+            doc.AddContent(content, SectionStub.StubSectionId);
             doc.GetContent().Count().Should().Be(1);
         }
 
@@ -33,16 +41,9 @@ namespace ContentDomain.Test
         {
             var doc = CreateDocument();
             var content = CreateNewContentElement();
-            doc.AddContent(content);
+            doc.AddContent(content, SectionStub.StubSectionId);
             var contentElements = doc.GetContent();
             contentElements.First().ContentElementId.Should().Be(content.ContentElementId);
-        }
-
-        [Fact]
-        public void should_have_name()
-        {
-            var doc = CreateDocument("Test name");
-            doc.Name.Should().Be("Test name");
         }
 
         [Fact]
@@ -63,7 +64,20 @@ namespace ContentDomain.Test
 
         private class SectionStub : IDocumentSection
         {
+            public const int StubSectionId = 1;
+            private List<ContentElement> _content = new List<ContentElement>();
 
+            public int SectionId { get { return StubSectionId; } }
+
+            public void AddContent(ContentElement content)
+            {
+                _content.Add(content);
+            }
+
+            public IImmutableList<ContentElement> GetContent()
+            {
+                return ImmutableList.CreateRange(_content);
+            }
         }
     }
 }

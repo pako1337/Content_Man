@@ -25,14 +25,19 @@ namespace ContentDomain
             _sections = sections.ToList();
         }
 
-        public void AddContent(ContentElement content)
+        public void AddContent(ContentElement content, int sectionId)
         {
-            _content.Add(content);
+            var section = _sections.FirstOrDefault(s => s.SectionId == sectionId);
+            section.AddContent(content);
         }
 
         public IImmutableList<ContentElement> GetContent()
         {
-            return ImmutableList.CreateRange<ContentElement>(_content);
+            var result = ImmutableList<ContentElement>.Empty;
+            foreach (var section in _sections)
+                result = result.AddRange(section.GetContent());
+
+            return result;
         }
 
         public IImmutableList<IDocumentSection> GetSections()
