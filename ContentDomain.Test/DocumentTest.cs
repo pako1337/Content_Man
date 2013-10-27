@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Extensions;
 using FluentAssertions;
+using ContentDomain.Factories;
 
 namespace ContentDomain.Test
 {
@@ -14,8 +15,37 @@ namespace ContentDomain.Test
         [Fact]
         public void should_have_open_status_by_default()
         {
-            var doc = new Document();
+            var doc = CreateDocument();
             doc.Status.Should().Be(DocumentStatus.Open);
+        }
+
+        [Fact]
+        public void should_hold_content()
+        {
+            var doc = CreateDocument();
+            var content = CreateNewContentElement();
+            doc.AddContent(content);
+            doc.GetContent().Count().Should().Be(1);
+        }
+
+        [Fact]
+        public void should_hold_element_added()
+        {
+            var doc = CreateDocument();
+            var content = CreateNewContentElement();
+            doc.AddContent(content);
+            var contentElements = doc.GetContent();
+            contentElements.First().ContentElementId.Should().Be(content.ContentElementId);
+        }
+
+        private static ContentElement CreateNewContentElement()
+        {
+            return new ContentElementFactory().Create(Language.InvariantCode, ContentType.Text);
+        }
+
+        private static Document CreateDocument()
+        {
+            return new Document();
         }
     }
 }
