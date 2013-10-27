@@ -15,10 +15,11 @@ namespace ContentDomain
         public string Name { get; private set; }
         public DocumentStatus Status { get; private set; }
 
-        public Document(string name)
+        public Document(int id, string name)
         {
-            Status = DocumentStatus.Open;
+            DocumentId = id;
             Name = name;
+            Status = DocumentStatus.Open;
             _content = new List<ContentElement>();
         }
 

@@ -52,7 +52,7 @@ namespace ContentDomain.Test
 
         private static Document CreateDocument(string name = "test")
         {
-            return new Document(name);
+            return new Document(-1, name);
         }
     }
 }
