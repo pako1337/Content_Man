@@ -38,14 +38,21 @@ namespace ContentDomain.Test
             contentElements.First().ContentElementId.Should().Be(content.ContentElementId);
         }
 
+        [Fact]
+        public void should_have_name()
+        {
+            var doc = CreateDocument("Test name");
+            doc.Name.Should().Be("Test name");
+        }
+
         private static ContentElement CreateNewContentElement()
         {
             return new ContentElementFactory().Create(Language.InvariantCode, ContentType.Text);
         }
 
-        private static Document CreateDocument()
+        private static Document CreateDocument(string name = "test")
         {
-            return new Document();
+            return new Document(name);
         }
     }
 }

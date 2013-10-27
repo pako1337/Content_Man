@@ -11,12 +11,14 @@ namespace ContentDomain
     {
         private List<ContentElement> _content;
 
-        public int DocumentId { get; set; }
-        public DocumentStatus Status { get; set; }
+        public int DocumentId { get; private set; }
+        public string Name { get; private set; }
+        public DocumentStatus Status { get; private set; }
 
-        public Document()
+        public Document(string name)
         {
             Status = DocumentStatus.Open;
+            Name = name;
             _content = new List<ContentElement>();
         }
 
