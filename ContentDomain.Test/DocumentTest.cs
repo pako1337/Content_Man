@@ -61,13 +61,13 @@ namespace ContentDomain.Test
         [Fact]
         public void should_throw_ArgumentNullException_when_name_not_provided()
         {
-            Assert.Throws<ArgumentNullException>(() => new Document(-1, null, new[] { new SectionStub(1) }));
+            Assert.Throws<ArgumentNullException>(() => CreateDocument(null));
         }
 
         [Fact]
         public void should_throw_ArgumentException_when_name_is_empty()
         {
-            Assert.Throws<ArgumentException>(() => new Document(-1, "", new[] { new SectionStub(1) }));
+            Assert.Throws<ArgumentException>(() => CreateDocument(""));
         }
 
         [Fact]
