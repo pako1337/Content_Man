@@ -32,7 +32,7 @@ namespace ContentDomain.Test
         {
             var doc = CreateDocument();
             var content = CreateNewContentElement();
-            doc.AddContent(content, SectionStub.StubSectionId);
+            doc.AddContent(content, 1);
             doc.GetContent().Count().Should().Be(1);
         }
 
@@ -41,7 +41,7 @@ namespace ContentDomain.Test
         {
             var doc = CreateDocument();
             var content = CreateNewContentElement();
-            doc.AddContent(content, SectionStub.StubSectionId);
+            doc.AddContent(content, 1);
             var contentElements = doc.GetContent();
             contentElements.First().ContentElementId.Should().Be(content.ContentElementId);
         }
@@ -61,20 +61,20 @@ namespace ContentDomain.Test
         [Fact]
         public void should_throw_ArgumentNullException_when_name_not_provided()
         {
-            Assert.Throws<ArgumentNullException>(() => new Document(-1, null, new[] { new SectionStub() }));
+            Assert.Throws<ArgumentNullException>(() => new Document(-1, null, new[] { new SectionStub(1) }));
         }
 
         [Fact]
         public void should_throw_ArgumentException_when_name_is_empty()
         {
-            Assert.Throws<ArgumentException>(() => new Document(-1, "", new[] { new SectionStub() }));
+            Assert.Throws<ArgumentException>(() => new Document(-1, "", new[] { new SectionStub(1) }));
         }
 
         [Fact]
         public void should_accept_new_section()
         {
             var doc = CreateDocument();
-            doc.AddSection(new SectionStub().WithName("new name"));
+            doc.AddSection(new SectionStub(1).WithName("new name"));
             doc.GetSections().Count().Should().Be(2);
         }
 
@@ -82,7 +82,7 @@ namespace ContentDomain.Test
         public void should_throw_ArgumentException_when_adding_section_with_existing_section_name()
         {
             var doc = CreateDocument();
-            Assert.Throws<ArgumentException>(() => doc.AddSection(new SectionStub()));
+            Assert.Throws<ArgumentException>(() => doc.AddSection(new SectionStub(1)));
         }
 
         private static ContentElement CreateNewContentElement()
@@ -92,19 +92,24 @@ namespace ContentDomain.Test
 
         private static Document CreateDocument(string name = "test")
         {
-            return new Document(-1, name, new[] { new SectionStub() });
+            return new Document(-1, name, new[] { new SectionStub(1) });
         }
 
         private class SectionStub : IDocumentSection
         {
-            public const int StubSectionId = 1;
             public const string DefaultName = "section name";
 
             private List<ContentElement> _content = new List<ContentElement>();
+            private int _id;
             private string _name = DefaultName;
 
-            public int SectionId { get { return StubSectionId; } }
+            public int SectionId { get { return _id; } }
             public string Name { get { return _name; } }
+
+            public SectionStub(int id)
+            {
+                _id = id;
+            }
 
             public void AddContent(ContentElement content)
             {
