@@ -17,9 +17,23 @@ namespace ContentDomain.Test
         [Fact]
         public void should_accept_any_content()
         {
-            var section = new FreeSection();
+            var section = new FreeSection(1, "name");
             section.AddContent(new ContentElement(-1, Language.Invariant, ContentType.Text));
             section.GetContent().Count().Should().Be(1);
+        }
+
+        [Fact]
+        public void should_require_id()
+        {
+            var section = new FreeSection(1, "name");
+            section.SectionId.Should().Be(1);
+        }
+
+        [Fact]
+        public void should_require_name()
+        {
+            var section = new FreeSection(1, "name");
+            section.Name.Should().Be("name");
         }
     }
 }

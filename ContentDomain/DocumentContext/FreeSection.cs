@@ -10,10 +10,18 @@ namespace ContentDomain.DocumentContext
 {
     public class FreeSection : IDocumentSection
     {
-        public List<ContentElement> _content = new List<ContentElement>();
+        private List<ContentElement> _content = new List<ContentElement>();
+        private int _id;
+        private string _name;
 
-        public int SectionId { get { return 1; } }
-        public string Name { get { return ""; } }
+        public int SectionId { get { return _id; } }
+        public string Name { get { return _name; } }
+
+        public FreeSection(int id,  string name)
+        {
+            _id = id;
+            _name = name;
+        }
 
         public void AddContent(ContentContext.ContentElement contentElement)
         {
