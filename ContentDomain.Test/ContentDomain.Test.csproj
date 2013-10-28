@@ -65,6 +65,7 @@
     <Compile Include="ContentElementTest.cs" />
     <Compile Include="ContentTypeFactory.cs" />
     <Compile Include="DocumentTest.cs" />
+    <Compile Include="FreeSectionTest.cs" />
     <Compile Include="LanguageIsoCodeFactory.cs" />
     <Compile Include="LanguageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

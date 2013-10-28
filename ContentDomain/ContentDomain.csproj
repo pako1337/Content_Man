@@ -65,6 +65,7 @@
     <Compile Include="ApplicationServices\ContentElementService.cs" />
     <Compile Include="DocumentContext\Document.cs" />
     <Compile Include="DocumentContext\DocumentStatus.cs" />
+    <Compile Include="DocumentContext\FreeSection.cs" />
     <Compile Include="DomainException.cs" />
     <Compile Include="ContentContext\ContentStatus.cs" />
     <Compile Include="ContentContext\ContentType.cs" />
