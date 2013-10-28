@@ -8,6 +8,7 @@ using Xunit.Extensions;
 using FluentAssertions;
 using ContentDomain.Factories;
 using System.Collections.Immutable;
+using ContentDomain.DocumentContext;
 
 namespace ContentDomain.Test
 {

@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 
-namespace ContentDomain
+namespace ContentDomain.DocumentContext
 {
     public interface IDocumentSection
     {

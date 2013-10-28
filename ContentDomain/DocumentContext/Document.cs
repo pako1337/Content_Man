@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContentDomain
+namespace ContentDomain.DocumentContext
 {
     public class Document
     {
