@@ -9,6 +9,7 @@ namespace ContentDomain
     public interface IDocumentSection
     {
         int SectionId { get; }
+        string Name { get; }
         void AddContent(ContentElement content);
         IImmutableList<ContentElement> GetContent();
     }

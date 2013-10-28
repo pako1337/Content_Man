@@ -70,6 +70,21 @@ namespace ContentDomain.Test
             Assert.Throws<ArgumentException>(() => new Document(-1, "", new[] { new SectionStub() }));
         }
 
+        [Fact]
+        public void should_accept_new_section()
+        {
+            var doc = CreateDocument();
+            doc.AddSection(new SectionStub().WithName("new name"));
+            doc.GetSections().Count().Should().Be(2);
+        }
+
+        [Fact]
+        public void should_throw_ArgumentException_when_adding_section_with_existing_section_name()
+        {
+            var doc = CreateDocument();
+            Assert.Throws<ArgumentException>(() => doc.AddSection(new SectionStub()));
+        }
+
         private static ContentElement CreateNewContentElement()
         {
             return new ContentElementFactory().Create(Language.InvariantCode, ContentType.Text);
@@ -83,9 +98,13 @@ namespace ContentDomain.Test
         private class SectionStub : IDocumentSection
         {
             public const int StubSectionId = 1;
+            public const string DefaultName = "section name";
+
             private List<ContentElement> _content = new List<ContentElement>();
+            private string _name = DefaultName;
 
             public int SectionId { get { return StubSectionId; } }
+            public string Name { get { return _name; } }
 
             public void AddContent(ContentElement content)
             {
@@ -95,6 +114,12 @@ namespace ContentDomain.Test
             public IImmutableList<ContentElement> GetContent()
             {
                 return ImmutableList.CreateRange(_content);
+            }
+
+            public SectionStub WithName(string name)
+            {
+                _name = name;
+                return this;
             }
         }
     }

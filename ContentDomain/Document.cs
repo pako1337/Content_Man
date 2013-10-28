@@ -22,6 +22,7 @@ namespace ContentDomain
                 throw new ArgumentNullException("name");
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Name cannot be empty", "name");
+
             if (sections.Count() == 0)
                 throw new ArgumentException("At least one section required", "sections");
 
@@ -51,6 +52,14 @@ namespace ContentDomain
         public IImmutableList<IDocumentSection> GetSections()
         {
             return ImmutableList.CreateRange(_sections);
+        }
+
+        public void AddSection(IDocumentSection section)
+        {
+            if (_sections.Any(s => string.Equals(s.Name, section.Name, StringComparison.OrdinalIgnoreCase)))
+                throw new ArgumentException("Section name must be unique inside document", "section");
+
+            _sections.Add(section);
         }
     }
 }
