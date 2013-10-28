@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using Xunit.Extensions;
+using ContentDomain.Shared;
 
 namespace ContentDomain.Test
 {

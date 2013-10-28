@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContentDomain
+namespace ContentDomain.Shared
 {
     public sealed class Language : IEquatable<Language>
     {

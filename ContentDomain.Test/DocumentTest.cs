@@ -10,6 +10,7 @@ using ContentDomain.Factories;
 using System.Collections.Immutable;
 using ContentDomain.DocumentContext;
 using ContentDomain.ContentContext;
+using ContentDomain.Shared;
 
 namespace ContentDomain.Test
 {

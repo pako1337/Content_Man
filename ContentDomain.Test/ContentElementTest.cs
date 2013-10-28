@@ -4,6 +4,7 @@ using Xunit;
 using FluentAssertions;
 using Xunit.Extensions;
 using ContentDomain.ContentContext;
+using ContentDomain.Shared;
 
 namespace ContentDomain.Test
 {
