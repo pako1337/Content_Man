@@ -8,6 +8,7 @@ using ContentDomain.Factories;
 using FluentAssertions;
 using Xunit;
 using Xunit.Extensions;
+using ContentDomain.ContentContext;
 
 namespace ContentDomain.Test
 {

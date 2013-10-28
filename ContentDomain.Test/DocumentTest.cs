@@ -9,6 +9,7 @@ using FluentAssertions;
 using ContentDomain.Factories;
 using System.Collections.Immutable;
 using ContentDomain.DocumentContext;
+using ContentDomain.ContentContext;
 
 namespace ContentDomain.Test
 {

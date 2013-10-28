@@ -66,18 +66,18 @@
     <Compile Include="DocumentContext\Document.cs" />
     <Compile Include="DocumentContext\DocumentStatus.cs" />
     <Compile Include="DomainException.cs" />
-    <Compile Include="ContentStatus.cs" />
-    <Compile Include="ContentType.cs" />
-    <Compile Include="ContentElement.cs" />
+    <Compile Include="ContentContext\ContentStatus.cs" />
+    <Compile Include="ContentContext\ContentType.cs" />
+    <Compile Include="ContentContext\ContentElement.cs" />
     <Compile Include="Dto\ContentElementDto.cs" />
     <Compile Include="Dto\TextContentDto.cs" />
     <Compile Include="Factories\ContentElementFactory.cs" />
-    <Compile Include="IContentValue.cs" />
+    <Compile Include="ContentContext\IContentValue.cs" />
     <Compile Include="DocumentContext\IDocumentSection.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ContentElementRepository.cs" />
-    <Compile Include="TextContent.cs" />
+    <Compile Include="ContentContext\TextContent.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -85,9 +85,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ContentContext\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

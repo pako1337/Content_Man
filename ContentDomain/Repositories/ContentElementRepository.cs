@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ContentDomain.Dto;
 using ContentDomain.Factories;
 using Simple.Data;
+using ContentDomain.ContentContext;
 
 namespace ContentDomain.Repositories
 {

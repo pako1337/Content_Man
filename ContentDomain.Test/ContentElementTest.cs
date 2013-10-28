@@ -3,6 +3,7 @@ using System.Linq;
 using Xunit;
 using FluentAssertions;
 using Xunit.Extensions;
+using ContentDomain.ContentContext;
 
 namespace ContentDomain.Test
 {
