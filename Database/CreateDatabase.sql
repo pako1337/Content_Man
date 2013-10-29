@@ -1,4 +1,7 @@
 ﻿DROP TABLE IF EXISTS "TextContents";
+DROP TABLE IF EXISTS "SectionsContentElements";
+DROP TABLE IF EXISTS "Sections";
+DROP TABLE IF EXISTS "Documents";
 DROP TABLE IF EXISTS "ContentElements";
 DROP TABLE IF EXISTS "Languages";
 
@@ -40,4 +43,43 @@ CREATE TABLE "TextContents"
 	CONSTRAINT "FK_TextContents_Languages"
 		FOREIGN KEY ("Language")
 		REFERENCES "Languages"("LanguageId")
+);
+
+CREATE TABLE "Documents"
+(
+	"DocumentId" serial NOT NULL,
+	"Name" varchar(255) NOT NULL,
+	"Status" integer NOT NULL,
+
+	CONSTRAINT "PK_Documents"
+		PRIMARY KEY ("DocumentId")
+);
+
+CREATE TABLE "Sections"
+(
+	"SectionId" serial NOT NULL,
+	"Type" int NOT NULL,
+	"Name" varchar(255) NOT NULL,
+	"DocumentId" int NOT NULL,
+
+	CONSTRAINT "PK_Sections"
+		PRIMARY KEY ("SectionId"),
+	CONSTRAINT "FK_Sections_Documents"
+		FOREIGN KEY ("DocumentId")
+		REFERENCES "Documents"
+);
+
+CREATE TABLE "SectionsContentElements"
+(
+	"SectionId" int NOT NULL,
+	"ContentElementId" int NOT NULL,
+
+	CONSTRAINT "PK_SectionsContentElements"
+		PRIMARY KEY ("SectionId", "ContentElementId"),
+	CONSTRAINT "FK_SectionsContentElements_ContentElements"
+		FOREIGN KEY ("ContentElementId")
+		REFERENCES "ContentElements"("ContentElementId"),
+	CONSTRAINT "FK_SectionsContentElements_Sections"
+		FOREIGN KEY ("SectionId")
+		REFERENCES "Sections"("SectionId")
 );
