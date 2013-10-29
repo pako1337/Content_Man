@@ -71,10 +71,13 @@
     <Compile Include="ContentContext\ContentType.cs" />
     <Compile Include="ContentContext\ContentElement.cs" />
     <Compile Include="Dto\ContentElementDto.cs" />
+    <Compile Include="Dto\DocumentDto.cs" />
+    <Compile Include="Dto\SectionDto.cs" />
     <Compile Include="Dto\TextContentDto.cs" />
     <Compile Include="Factories\ContentElementFactory.cs" />
     <Compile Include="ContentContext\IContentValue.cs" />
     <Compile Include="DocumentContext\IDocumentSection.cs" />
+    <Compile Include="Repositories\DocumentRepository.cs" />
     <Compile Include="Shared\Language.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ContentElementRepository.cs" />
