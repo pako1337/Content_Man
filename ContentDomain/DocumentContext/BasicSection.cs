@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ContentDomain.DocumentContext
 {
-    public class FreeSection : IDocumentSection
+    public class BasicSection : IDocumentSection
     {
         private List<ContentElement> _content = new List<ContentElement>();
         private int _id;
@@ -17,7 +17,7 @@ namespace ContentDomain.DocumentContext
         public int SectionId { get { return _id; } }
         public string Name { get { return _name; } }
 
-        public FreeSection(int id,  string name)
+        public BasicSection(int id,  string name)
         {
             _id = id;
             _name = name;
