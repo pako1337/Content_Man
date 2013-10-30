@@ -10,7 +10,6 @@ namespace ContentDomain.Dto
     {
         public int DocumentId { get; set; }
         public string Name { get; set; }
-        public int Status { get; set; }
         public List<SectionDto> Sections { get; set; }
     }
 }

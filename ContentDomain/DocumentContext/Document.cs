@@ -15,7 +15,6 @@ namespace ContentDomain.DocumentContext
 
         public int DocumentId { get; private set; }
         public string Name { get; private set; }
-        public DocumentStatus Status { get; private set; }
 
         public Document(int id, string name, IEnumerable<IDocumentSection> sections)
         {
@@ -29,7 +28,6 @@ namespace ContentDomain.DocumentContext
 
             DocumentId = id;
             Name = name;
-            Status = DocumentStatus.Open;
 
             _content = new List<ContentElement>();
             _sections = sections.ToList();

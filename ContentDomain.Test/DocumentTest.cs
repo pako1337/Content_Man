@@ -17,13 +17,6 @@ namespace ContentDomain.Test
     public class DocumentTest
     {
         [Fact]
-        public void should_have_open_status_by_default()
-        {
-            var doc = CreateDocument();
-            doc.Status.Should().Be(DocumentStatus.Open);
-        }
-
-        [Fact]
         public void should_have_name()
         {
             var doc = CreateDocument("Test name");
