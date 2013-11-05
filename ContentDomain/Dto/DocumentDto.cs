@@ -11,5 +11,12 @@ namespace ContentDomain.Dto
         public int DocumentId { get; set; }
         public string Name { get; set; }
         public List<SectionDto> Sections { get; set; }
+
+        public DocumentDto(DocumentContext.Document doc)
+        {
+            DocumentId = doc.DocumentId;
+            Name = doc.Name;
+            Sections = doc.GetSections().Select(s => new SectionDto(s)).ToList();
+        }
     }
 }
