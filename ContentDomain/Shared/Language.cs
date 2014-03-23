@@ -18,12 +18,7 @@ namespace ContentDomain.Shared
         public string LanguageId { get; private set; }
         public bool IsRightToLeft { get; private set; }
         public string Name { get; private set; }
-
-        public Language()
-        {
-
-        }
-
+        
         public Language(string isoCode)
         {
             this.LanguageId = isoCode;
@@ -47,20 +42,29 @@ namespace ContentDomain.Shared
 
         public static Language Create(string isoCode)
         {
+            CreateLanguageIfNeeded(isoCode);
+
+            return _languages[isoCode];
+        }
+
+        private static void CreateLanguageIfNeeded(string isoCode)
+        {
             if (!_languages.ContainsKey(isoCode))
             {
-                if (!string.Equals(Language.InvariantCode, isoCode, StringComparison.CurrentCultureIgnoreCase)
-                    &&
-                    CultureInfo
-                    .GetCultures(CultureTypes.AllCultures)
-                    .All(c => !string.Equals(c.Name, isoCode, StringComparison.CurrentCultureIgnoreCase)))
+                if (IsUknownCulture(isoCode))
                     throw new ArgumentException("Unknown iso code", "isoCode");
 
                 var language = new Language(isoCode);
                 _languages[isoCode] = language;
             }
+        }
 
-            return _languages[isoCode];
+        private static bool IsUknownCulture(string isoCode)
+        {
+            return
+                !string.Equals(Language.InvariantCode, isoCode, StringComparison.CurrentCultureIgnoreCase) &&
+                 CultureInfo.GetCultures(CultureTypes.AllCultures)
+                            .All(c => !string.Equals(c.Name, isoCode, StringComparison.CurrentCultureIgnoreCase));
         }
     }
 }

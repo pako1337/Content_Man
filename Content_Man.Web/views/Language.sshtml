@@ -1,12 +1,15 @@
 ﻿@Master['Master']
 
 @Section['Content']
-<div ng-app="Content">
+<div ng-app="Language">
     <div class="row">
         <h3>Languages!</h3>
+    </div>
+    <div class="row" ng-view>
     </div>
 </div>
 @EndSection
 
 @Section['Scripts']
+<script type="text/javascript" src="../Scripts/Language.js"></script>
 @EndSection
