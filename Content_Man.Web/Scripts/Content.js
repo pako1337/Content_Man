@@ -2,6 +2,7 @@
     .config(function ($routeProvider) {
         $routeProvider
             .when('',                       { controller: ContentList, templateUrl: 'ContentList.html' })
+            .when('/',                      { controller: ContentList, templateUrl: 'ContentList.html' })
             .when('/edit/:contentId/:lang', { controller: ContentEdit, templateUrl: 'ContentEdit.html' })
             .when('/add/:lang',             { controller: ContentAdd,  templateUrl: 'ContentEdit.html' })
             .otherwise({ redirectTo: '' });
@@ -13,25 +14,24 @@ ContentModule.factory('contentProvider', function ($http) {
         getContentElements: function () {
             var that = this;
             $http.get('/api/ContentElement')
-                .success(function (data, status, headers, config) {
-                    that.contentElements.length = 0;
-                    data
-                        .map(function (e) { return new ContentElement(e) })
-                        .forEach(function (e) { that.contentElements.push(e) });
-                })
-                .error(function (data, status, headers, config) {
-                    console.log("Failed to get ContentElements");
-                });
+                 .success(function (data, status, headers, config) {
+                     that.contentElements.length = 0;
+                     data.map(function (e) { return new ContentElement(e) })
+                         .forEach(function (e) { that.contentElements.push(e) });
+                 })
+                 .error(function (data, status, headers, config) {
+                     console.log("Failed to get ContentElements");
+                 });
         },
 
         getcontentElement: function (elementId, elementReady) {
             $http.get('api/ContentElement/' + elementId)
-                .success(function (data, status, headers, config) {
-                    elementReady(new ContentElement(data));
-                })
-                .error(function (data, status, headers, config) {
-                    console.log("Failed to get ContentElement: " + elementId);
-                });
+                 .success(function (data, status, headers, config) {
+                     elementReady(new ContentElement(data));
+                 })
+                 .error(function (data, status, headers, config) {
+                     console.log("Failed to get ContentElement: " + elementId);
+                 });
         }
     };
 });
@@ -43,7 +43,7 @@ function ContentList($scope, contentProvider) {
         contentProvider.getContentElements();
 }
 
-function ContentEdit($scope, $routeParams, contentProvider, $http) {
+function ContentEdit($scope, $routeParams, $http, $location, contentProvider) {
     $scope.contentElement = undefined;
 
     (function () {
@@ -64,10 +64,11 @@ function ContentEdit($scope, $routeParams, contentProvider, $http) {
 
     $scope.save = function () {
         $http.put('api/ContentElement/' + $scope.contentElement.ContentElementId, $scope.contentElement);
+        $location.path("/");
     }
 }
 
-function ContentAdd($scope, $routeParams, $http) {
+function ContentAdd($scope, $routeParams, $http, $location) {
     $scope.contentElement = new ContentElement({
         ContentElementId: -1,
         DefaultLanguage: $routeParams.lang,
@@ -76,6 +77,7 @@ function ContentAdd($scope, $routeParams, $http) {
 
     $scope.save = function () {
         $http.post('api/ContentElement/', $scope.contentElement);
+        $location.path("/");
     };
 }
 
