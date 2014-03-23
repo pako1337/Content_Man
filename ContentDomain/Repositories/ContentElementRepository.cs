@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ContentDomain.Dto;
 using ContentDomain.Factories;
-using Simple.Data;
 using ContentDomain.ContentContext;
+using Simple.Data;
 
 namespace ContentDomain.Repositories
 {
@@ -18,9 +15,9 @@ namespace ContentDomain.Repositories
         {
             var db = Database.Open();
             List<ContentElementDto> dbElements = db.ContentElements
-                .All()
-                .OrderByContentElementId()
-                .WithTextContents();
+                                                   .All()
+                                                   .OrderByContentElementId()
+                                                   .WithTextContents();
 
             foreach (var element in dbElements)
                 yield return factory.Create(element);
@@ -30,8 +27,8 @@ namespace ContentDomain.Repositories
         {
             var db = Database.Open();
             List<ContentElementDto> elements = db.ContentElements
-                .FindAllByContentElementId(contentElementId)
-                .WithTextContents();
+                                                 .FindAllByContentElementId(contentElementId)
+                                                 .WithTextContents();
             return factory.Create(elements.FirstOrDefault());
         }
 

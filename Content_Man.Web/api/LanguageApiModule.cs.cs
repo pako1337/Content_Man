@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Nancy;
+using Nancy.ModelBinding;
 
 namespace Content_Man.Web.Api
 {
@@ -13,7 +15,8 @@ namespace Content_Man.Web.Api
         {
             Get["/"] = _ =>
             {
-                return new[] { Language.Invariant };
+                var languages = new LanguageRepository().GetLanguages();
+                return Response.AsJson<IEnumerable<Language>>(languages);
             };
         }
     }
