@@ -19,9 +19,10 @@ namespace ContentDomain.Shared
         public bool IsRightToLeft { get; private set; }
         public string Name { get; private set; }
         
-        public Language(string isoCode)
+        public Language(string isoCode, string name)
         {
-            this.LanguageId = isoCode;
+            LanguageId = isoCode;
+            Name = name;
         }
 
         public override bool Equals(object obj)
@@ -54,9 +55,17 @@ namespace ContentDomain.Shared
                 if (IsUknownCulture(isoCode))
                     throw new ArgumentException("Unknown iso code", "isoCode");
 
-                var language = new Language(isoCode);
+                var language = new Language(isoCode, GetDisplayName(isoCode));
                 _languages[isoCode] = language;
             }
+        }
+
+        private static string GetDisplayName(string isoCode)
+        {
+            if (string.Equals(Language.InvariantCode, isoCode, StringComparison.CurrentCultureIgnoreCase))
+                return Language.InvariantCode;
+
+            return CultureInfo.GetCultureInfo(isoCode).EnglishName;
         }
 
         private static bool IsUknownCulture(string isoCode)

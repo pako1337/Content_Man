@@ -49,7 +49,7 @@ namespace ContentDomain.Test
         public void should_throw_when_first_value_added_is_not_of_default_language()
         {
             var contentElement = CreateDefaultContentElement();
-            var content = ValueStub.Create().WithLanguage(new Language("en"));
+            var content = ValueStub.Create().WithLanguage(Language.Create("en"));
             Assert.Throws<ArgumentException>(() => contentElement.AddValue(content));
         }
 
@@ -59,7 +59,7 @@ namespace ContentDomain.Test
             var contentElement = CreateDefaultContentElement();
             var contents = new[]
             {
-                ValueStub.Create().WithLanguage(new Language("en")),
+                ValueStub.Create().WithLanguage(Language.Create("en")),
                 ValueStub.Create().WithLanguage(Language.Invariant)
             };
 

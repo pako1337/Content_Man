@@ -16,8 +16,8 @@ namespace ContentDomain.Test
         [ClassData(typeof(LanguageIsoCodeFactory))]
         public void should_be_equal_when_the_same_code(string langCode)
         {
-            var language1 = new Language(langCode);
-            var language2 = new Language(langCode);
+            var language1 = Language.Create(langCode);
+            var language2 = Language.Create(langCode);
 
             language1.Should().Be(language2);
         }
@@ -51,6 +51,21 @@ namespace ContentDomain.Test
             var language1 = Language.Create(langCode);
             var language2 = Language.Create(langCode);
             language1.Should().Be(language2);
+        }
+
+        [Theory]
+        [ClassData(typeof(LanguageIsoCodeFactory))]
+        public void should_fill_name(string langCode)
+        {
+            var language = Language.Create(langCode);
+            language.Name.Should().NotBeNull();
+        }
+
+        [Fact]
+        public void should_fill_language_name_in_english()
+        {
+            var language = Language.Create("en");
+            language.Name.Should().Be("English");
         }
 
         [Fact]
