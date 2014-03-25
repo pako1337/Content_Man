@@ -1,4 +1,17 @@
-﻿<div class="row" ng-repeat="element in contentElements">
+﻿<div class="row">
+    <div class="col-lg-7"></div>
+    <div class="col-lg-3">
+        <div class="dropdown">
+            <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">{{selectedLanguage}}<b class="caret"></b></a>
+            <ul class="dropdown-menu" role="menu">
+                <li role="presentation" ng-repeat="language in availableLanguages">
+                    <a ng-click="element.changeLanguage(language)">{{language}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row" ng-repeat="element in contentElements">
     <div class="row">
         <div class="col-lg-7 col-xs-12">{{element.SelectedValue.Value}}</div>
         <div class="col-lg-3 col-xs-12">
