@@ -102,9 +102,9 @@ function ContentEdit($scope, $routeParams, $http, $location, contentProvider) {
 
 function ContentAdd($scope, $routeParams, $http, $location) {
     $scope.contentElement = new ContentElement({
-        contentElementId: -1,
-        defaultLanguage: $routeParams.lang,
-        textContents: [{ Language: $routeParams.lang }]
+        ContentElementId: -1,
+        DefaultLanguage: $routeParams.lang,
+        TextContents: [{ Language: $routeParams.lang }]
     });
 
     $scope.save = function () {
