@@ -9,23 +9,22 @@
     });
 
 ContentModule.factory('contentProvider', function ($http, $q) {
+    var contentElements = [];
     return {
-        contentElements: [],
         getContentElements: function () {
-            var that = this;
             var defered = $q.defer();
 
-            if (that.contentElements.length > 0) {
-                defered.resolve(that.contentElements);
+            if (contentElements.length > 0) {
+                defered.resolve(contentElements);
             }
             else {
                 $http.get('/api/ContentElement')
                     .success(function (data, status, headers, config) {
-                        that.contentElements.length = 0;
+                        contentElements.length = 0;
                         data.map(function (e) { return new ContentElement(e) })
-                            .forEach(function (e) { that.contentElements.push(e) });
+                            .forEach(function (e) { contentElements.push(e) });
 
-                        defered.resolve(that.contentElements);
+                        defered.resolve(contentElements);
                     })
                     .error(function (data, status, headers, config) {
                         console.log("Failed to get ContentElements");
@@ -37,11 +36,8 @@ ContentModule.factory('contentProvider', function ($http, $q) {
         },
 
         getcontentElement: function (elementId) {
-            var that = this;
             var defered = $q.defer();
-
-            var elements = that.contentElements.filter(
-                function (e) { return e.contentElementId === elementId });
+            var elements = contentElements.filter(function (e) { return e.contentElementId === elementId });
 
             if (elements.length > 0) {
                 defered.resolve(elements[0]);
@@ -64,25 +60,30 @@ ContentModule.factory('contentProvider', function ($http, $q) {
 });
 
 function ContentList($scope, contentProvider) {
-    $scope.contentElements = contentProvider.contentElements;
-    $scope.selectedLanguage = "";
-    $scope.availableLanguages = [];
+    $scope.contentElements;
+    $scope.selectedLanguage;
+    $scope.availableLanguages;
 
     function prepareLanguageFiltering() {
         if ($scope.contentElements.length > 0) {
-            $scope.contentElements
-                  .map(function (element) { return element.languages; })
-                  .reduce(function (previous, languages) { return previous.concat(languages) })
-                  .forEach(function (language) {
-                      if ($scope.availableLanguages.indexOf(language) == -1)
-                          $scope.availableLanguages.push(language);
-                  });
+            $scope.availableLanguages = $scope.contentElements
+                                              .map(function (element) { return element.languages; })
+                                              .reduce(function (previous, languages) {
+                                                  languages.forEach(function (language) {
+                                                      if (previous.indexOf(language) == -1)
+                                                          previous.push(language);
+                                                  })
+                                                  return previous;
+                                              });
+
             $scope.selectedLanguage = $scope.availableLanguages[0];
         }
     }
 
     var resultPromise = contentProvider.getContentElements();
-    resultPromise.then(prepareLanguageFiltering);
+    resultPromise
+        .then(function (contentElements) { $scope.contentElements = contentElements})
+        .then(prepareLanguageFiltering);
 }
 
 function ContentEdit($scope, $routeParams, $http, $location, contentProvider) {
