@@ -8,32 +8,57 @@
             .otherwise({ redirectTo: '' });
     });
 
-ContentModule.factory('contentProvider', function ($http) {
+ContentModule.factory('contentProvider', function ($http, $q) {
     return {
         contentElements: [],
-        getContentElements: function (elementsReady) {
+        getContentElements: function () {
             var that = this;
-            $http.get('/api/ContentElement')
-                 .success(function (data, status, headers, config) {
-                     that.contentElements.length = 0;
-                     data.map(function (e) { return new ContentElement(e) })
-                         .forEach(function (e) { that.contentElements.push(e) });
+            var defered = $q.defer();
 
-                     if (elementsReady) elementsReady();
-                 })
-                 .error(function (data, status, headers, config) {
-                     console.log("Failed to get ContentElements");
-                 });
+            if (that.contentElements.length > 0) {
+                defered.resolve(that.contentElements);
+            }
+            else {
+                $http.get('/api/ContentElement')
+                    .success(function (data, status, headers, config) {
+                        that.contentElements.length = 0;
+                        data.map(function (e) { return new ContentElement(e) })
+                            .forEach(function (e) { that.contentElements.push(e) });
+
+                        defered.resolve(that.contentElements);
+                    })
+                    .error(function (data, status, headers, config) {
+                        console.log("Failed to get ContentElements");
+                        defered.reject("Failed to get ContentElements");
+                    });
+            }
+
+            return defered.promise;
         },
 
-        getcontentElement: function (elementId, elementReady) {
-            $http.get('api/ContentElement/' + elementId)
-                 .success(function (data, status, headers, config) {
-                     elementReady(new ContentElement(data));
-                 })
-                 .error(function (data, status, headers, config) {
-                     console.log("Failed to get ContentElement: " + elementId);
-                 });
+        getcontentElement: function (elementId) {
+            var that = this;
+            var defered = $q.defer();
+
+            var elements = that.contentElements.filter(
+                function (e) { return e.contentElementId === elementId });
+
+            if (elements.length > 0) {
+                defered.resolve(elements[0]);
+            }
+            else {
+                $http.get('api/ContentElement/' + elementId)
+                     .success(function (data, status, headers, config) {
+                         var contentElement = new ContentElement(data);
+                         defered.resolve(contentElement);
+                     })
+                     .error(function (data, status, headers, config) {
+                         console.log("Failed to get ContentElement: " + elementId);
+                         defered.reject("Failed to get ContentElement: " + elementId);
+                     });
+            }
+
+            return defered.promise;
         }
     };
 });
@@ -56,30 +81,18 @@ function ContentList($scope, contentProvider) {
         }
     }
 
-    if (contentProvider.contentElements.length == 0)
-        contentProvider.getContentElements(function () { prepareLanguageFiltering(); });
-    else
-        prepareLanguageFiltering();
+    var resultPromise = contentProvider.getContentElements();
+    resultPromise.then(prepareLanguageFiltering);
 }
 
 function ContentEdit($scope, $routeParams, $http, $location, contentProvider) {
     $scope.contentElement = undefined;
-
-    (function () {
-        var elements = contentProvider.contentElements.filter(
-            function (e) { return e.contentElementId === $routeParams.contentId });
-        if (elements.length > 0)
-            setContentElement(elements[0], $routeParams.lang);
-        else
-            contentProvider.getcontentElement(
-                $routeParams.contentId,
-                function (e) { setContentElement(e, $routeParams.lang) });
-    })();
-
-    function setContentElement(contentElement, lang) {
-        contentElement.changeLanguage(lang);
+    
+    var resultPromise = contentProvider.getcontentElement($routeParams.contentId);
+    resultPromise.then(function (contentElement) {
+        contentElement.changeLanguage($routeParams.lang);
         $scope.contentElement = contentElement;
-    }
+    });
 
     $scope.save = function () {
         $http.put('api/ContentElement/' + $scope.contentElement.contentElementId, $scope.contentElement);
